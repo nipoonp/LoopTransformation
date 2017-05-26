@@ -62,52 +62,9 @@ public class GUI {
 		btnTransform.setBackground(Color.RED);
 		btnTransform.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
-				inputString = inputTextField.getText();
-				
-				processString = inputString.replaceAll("\\s","");
-				
-				String[] parts = processString.split("}");
-				
-				outputTextField.setText(processString);
-				
-				try(FileWriter fw = new FileWriter("Loop_to_check.java", false);
-					    BufferedWriter bw = new BufferedWriter(fw);
-					    PrintWriter out = new PrintWriter(bw))
-					{
-					    out.println("package main;");
-					    out.println("public class Loop_to_check {");
-					    out.println("public class CheckCode {");
-					    out.println("public void main (String [] args) {");
-					    
-					    out.println("\n");
-					    out.println("\n");
-					    
-					    out.println(inputString);
-					    
-					    out.println("\n");
-					    out.println("\n");
-					    
-					    out.println("}");
-					    out.println("}");
-					    out.println("}");
 
-					    
-					    //more code
-					    
-					    //more code
-					} catch (IOException e1) {
-					    //exception handling left as an exercise for the reader
-					}
-				
-			    System.out.println(JavaSyntaxChecker.check("Loop_to_check.java"));
-
-				//System.out.println(inputString);
-=======
 
 				write_to_file();
-
->>>>>>> 742d961b706933e67cc592114cf611ca738d4968
 			}
 		});
 		btnTransform.setBounds(413, 210, 106, 32);
@@ -181,10 +138,16 @@ public class GUI {
 		frame.getContentPane().add(ReversalLabel);
 	}
 	
+	private String processString(String inputString){
+		
+		String outputString = inputString;
+		return outputString;
+	}
+	
 	private void write_to_file(){
 		
 		inputString = inputTextField.getText();
-		outputTextField.setText(inputString);
+		outputTextField.setText(processString(inputString));
 		
 		try(FileWriter fw = new FileWriter("Loop_to_check.java", false);
 			    BufferedWriter bw = new BufferedWriter(fw);
