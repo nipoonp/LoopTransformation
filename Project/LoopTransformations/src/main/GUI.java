@@ -156,7 +156,8 @@ public class GUI {
 		inputString = inputTextField.getText();
 		LinkedList<String> processedString = processString(inputString);
 		boolean dependency = checkDependency(processedString);
-		outputTextField.setText(processedString);
+		outputTextField.setText(inputString);
+		
 		
 		try(FileWriter fw = new FileWriter("Loop_to_check.java", false);
 			    BufferedWriter bw = new BufferedWriter(fw);
