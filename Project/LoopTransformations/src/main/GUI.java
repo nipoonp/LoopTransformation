@@ -180,4 +180,23 @@ public class GUI {
 		
 	    System.out.println(JavaSyntaxChecker.check("Loop_to_check.java"));
 	}
+	
+	private void getDependencies(){
+		
+		String input1 = "a[i] = a[i] + 3";
+		String input2 = "b[i] = a[i + 2] + 3";
+		
+		
+		
+		
+		
+		
+	}
+	
+	private int gcd(int a, int b)
+	{
+	  if(a == 0 || b == 0) return a+b; // base case
+	  return gcd(b,a%b);
+	}
 }
+
