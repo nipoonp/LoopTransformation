@@ -9,6 +9,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedList;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.JTextField;
@@ -138,16 +139,24 @@ public class GUI {
 		frame.getContentPane().add(ReversalLabel);
 	}
 	
-	private String processString(String inputString){
+	private LinkedList<String> processString(String inputString){
+		LinkedList<String> processedLinkedList = new LinkedList<String>();  
 		
 		String outputString = inputString;
-		return outputString;
+		return processedLinkedList;
+	}
+	
+	private boolean checkDependency(LinkedList<String> processedLinkedList){
+		
+		return false;
 	}
 	
 	private void write_to_file(){
 		
 		inputString = inputTextField.getText();
-		outputTextField.setText(processString(inputString));
+		LinkedList<String> processedString = processString(inputString);
+		boolean dependency = checkDependency(processedString);
+		outputTextField.setText(processedString);
 		
 		try(FileWriter fw = new FileWriter("Loop_to_check.java", false);
 			    BufferedWriter bw = new BufferedWriter(fw);
