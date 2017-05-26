@@ -163,7 +163,7 @@ public class GUI {
 		loopInversionLabel.setBounds(23, 313, 91, 14);
 		frame.getContentPane().add(loopInversionLabel);
 
-		JLabel ReversalLabel = new JLabel("Loop Reversal");
+		JLabel ReversalLabel = new JLabel("Loop Reversal Testinglierkjaelfkjs");
 		ReversalLabel.setForeground(Color.BLUE);
 		ReversalLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 		ReversalLabel.setBounds(23, 366, 82, 14);
