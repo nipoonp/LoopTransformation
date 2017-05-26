@@ -23,7 +23,7 @@ public class GUI {
 	private JFrame frame;
 	private JTextArea inputTextField;
 	private JTextArea outputTextField;
-	private String inputString;
+	private String inputString, processString;
 	private JavaSyntaxChecker checker;
 	/**
 	 * Launch the application.
@@ -63,7 +63,12 @@ public class GUI {
 		btnTransform.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				inputString = inputTextField.getText();
-				outputTextField.setText(inputString);
+				
+				processString = inputString.replaceAll("\\s","");
+				
+				String[] parts = processString.split("}");
+				
+				outputTextField.setText(processString);
 				
 				try(FileWriter fw = new FileWriter("Loop_to_check.java", false);
 					    BufferedWriter bw = new BufferedWriter(fw);
