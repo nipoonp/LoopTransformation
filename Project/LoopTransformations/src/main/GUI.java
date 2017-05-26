@@ -62,41 +62,9 @@ public class GUI {
 		btnTransform.setBackground(Color.RED);
 		btnTransform.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				inputString = inputTextField.getText();
-				outputTextField.setText(inputString);
-				
-				try(FileWriter fw = new FileWriter("Loop_to_check.java", false);
-					    BufferedWriter bw = new BufferedWriter(fw);
-					    PrintWriter out = new PrintWriter(bw))
-					{
-					    out.println("package main;");
-					    out.println("public class Loop_to_check {");
-					    out.println("public class CheckCode {");
-					    out.println("public void main (String [] args) {");
-					    
-					    out.println("\n");
-					    out.println("\n");
-					    
-					    out.println(inputString);
-					    
-					    out.println("\n");
-					    out.println("\n");
-					    
-					    out.println("}");
-					    out.println("}");
-					    out.println("}");
 
-					    
-					    //more code
-					    
-					    //more code
-					} catch (IOException e1) {
-					    //exception handling left as an exercise for the reader
-					}
-				
-			    System.out.println(JavaSyntaxChecker.check("Loop_to_check.java"));
+				write_to_file();
 
-				//System.out.println(inputString);
 			}
 		});
 		btnTransform.setBounds(413, 210, 106, 32);
@@ -163,10 +131,47 @@ public class GUI {
 		loopInversionLabel.setBounds(23, 313, 91, 14);
 		frame.getContentPane().add(loopInversionLabel);
 
-		JLabel ReversalLabel = new JLabel("Loop Reversal Testinglierkjaelfkjs");
+		JLabel ReversalLabel = new JLabel("Loop Reversal");
 		ReversalLabel.setForeground(Color.BLUE);
 		ReversalLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 		ReversalLabel.setBounds(23, 366, 82, 14);
 		frame.getContentPane().add(ReversalLabel);
+	}
+	
+	private void write_to_file(){
+		
+		inputString = inputTextField.getText();
+		outputTextField.setText(inputString);
+		
+		try(FileWriter fw = new FileWriter("Loop_to_check.java", false);
+			    BufferedWriter bw = new BufferedWriter(fw);
+			    PrintWriter out = new PrintWriter(bw))
+			{
+			    out.println("package main;");
+			    out.println("public class Loop_to_check {");
+			    out.println("public class CheckCode {");
+			    out.println("public void main (String [] args) {");
+			    
+			    out.println("\n");
+			    out.println("\n");
+			    
+			    out.println(inputString);
+			    
+			    out.println("\n");
+			    out.println("\n");
+			    
+			    out.println("}");
+			    out.println("}");
+			    out.println("}");
+
+			    
+			    //more code
+			    
+			    //more code
+			} catch (IOException e1) {
+			    //exception handling left as an exercise for the reader
+			}
+		
+	    System.out.println(JavaSyntaxChecker.check("Loop_to_check.java"));
 	}
 }
