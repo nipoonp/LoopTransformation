@@ -527,6 +527,7 @@ public class Generic {
 	}
 
 	private ArrayList<String> getGCDParams_forI(String s) {
+		// returns the gcd parameters for i based on where i is located in the string
 
 		if (s.contains("[i")) {
 			return getGCDParams_ifNumberOnRightofi(s);
@@ -537,7 +538,9 @@ public class Generic {
 	}
 
 	private ArrayList<String> getGCDParams_ifNumberOnRightofi(String s) {
-
+		//this function allows us to acquire the GCD parameters if the user inputs a format
+		// like i*a + c.
+		
 		String temp1_leftofi = "";
 		String temp2_rightofi = "";
 		String var1 = "";
@@ -614,7 +617,9 @@ public class Generic {
 	}
 
 	private ArrayList<String> getGCDParams_ifNumberOnLeftofi(String s) {
-
+		//this function allows us to acquire the GCD parameters if the user inputs a format
+		// like a*i + c.
+			
 		String temp1_leftofi = "";
 		String temp2_rightofi = "";
 		String var1 = "";
