@@ -83,7 +83,7 @@ public class GUI extends JPanel{
 		ImageIcon InterchangeIcon = new ImageIcon(this.getClass().getResource("/images/Use.jpg"));
 		interchangeHelp.setTitle("Interchage Help");
 		interchangeHelp.setResizable(true);
-		interchangeHelp.setBounds(0,0, 1024, 612);
+		interchangeHelp.setBounds(0,0, 800, 600);
 		interchangeHelp.setLocationRelativeTo(null);
 		interchangeHelp.setVisible( true ); 
 		interchangeHelp.setAlwaysOnTop(true);
