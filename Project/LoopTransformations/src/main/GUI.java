@@ -59,12 +59,27 @@ public class GUI extends JPanel{
 	 */
 	public GUI() {
 		initialize();
+	
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		
+		interchangeHelp = new JFrame();
+		ImageIcon InterchangeIcon = new ImageIcon(this.getClass().getResource("/images/Interchange.jpg"));
+		interchangeHelp.setTitle("Interchage Help");
+		interchangeHelp.setResizable(true);
+		interchangeHelp.setBounds(0,0, 900, 800);
+		interchangeHelp.setLocationRelativeTo(null);
+		interchangeHelp.setVisible( true ); 
+		interchangeHelp.setAlwaysOnTop(true);
+		interchangeHelp.add(new JLabel(InterchangeIcon));
+		
+		
+		
 		frmLoopOptimization = new JFrame();
 		frmLoopOptimization.getContentPane().setBackground(Color.ORANGE);
 		frmLoopOptimization.setMaximumSize(new Dimension(1200, 700));
@@ -76,7 +91,7 @@ public class GUI extends JPanel{
 		frmLoopOptimization.setBounds(10, 10, 856, 477);
 		frmLoopOptimization.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmLoopOptimization.getContentPane().setLayout(null);
-
+		frmLoopOptimization.setLocationRelativeTo(null);
 		inputTextField = new JTextArea();
 		inputTextField.setBounds(25, 38, 440, 622);
 		inputTextField.setFont(new Font("Arial", Font.PLAIN, 24));
@@ -461,6 +476,8 @@ public class GUI extends JPanel{
 
 	private void processString(String inputString) {
 		String[] splitLineArray = inputString.split("\\r?\\n");
+		
+		stringsArrayList = new ArrayList<ArrayList<String>>();
 
 		ArrayList<String> currArrayList = new ArrayList<String>();
 
@@ -504,6 +521,9 @@ public class GUI extends JPanel{
 	private void write_to_file() {
 
 		inputString = inputTextField.getText();
+		System.out.println("=================");
+		System.out.println(inputString);
+		System.out.println("=================");
 		processString(inputString);
 		//outputTextField.setText(inputString);
 

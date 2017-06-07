@@ -15,10 +15,11 @@ int k=0;
 
 
 
+int offset = 55;
 for (i = 0; i < 300; i++){
-	for (j = 0; j < 300; j++){
-	x[i][j] = y[i][j];
-	}
+   for (j = 0; j < 300; j++){
+      x[i][j] = x[i][j] + offset;
+   }
 }
 
 

@@ -1,3 +1,15 @@
+/**
+* <h1>Loop Optimization</h1>
+* The loop optimization program implements an application that
+* finds dependencies in loops and rearranges them to make them
+* paralleizable.
+
+*
+* @author  Softeng 751 2017 group 17
+* @version 1.0
+* @since   2017-05-08
+*/
+
 package main;
 
 import java.io.BufferedWriter;
@@ -13,7 +25,13 @@ import javax.script.ScriptException;
 import javax.swing.JOptionPane;
 
 public class Generic {
-	
+	   /**
+	   * This method is used to check if two strings are the same.
+	   * 
+	   * @param input This is the first paramter to checkIfEqual method
+	   * @param input2  This is the second parameter to checkIfEqual method
+	   * @return boolean This returns true if both strings are the same.
+	   */
 	protected boolean checkIfEqual(String input, String input2) {
 		input = input.substring(input.indexOf("=") + 1);
 		input = input.substring(0, input.indexOf(")"));
@@ -28,6 +46,13 @@ public class Generic {
 		return input.equalsIgnoreCase(input2);
 	}
 
+	
+	   /**
+	   * This method is used to get the iteration variable for a for loop.
+	   * @param word This is the first line of the for loop which is used to find
+	   * out the iteration variable 
+	   * @return char This returns the iteration variable used in this for loop..
+	   */
 	protected char getIterationVariable(String word) {
 		if (word == null || word.isEmpty()) {
 			throw new IllegalArgumentException("input word must have non-empty value.");
@@ -459,7 +484,7 @@ public class Generic {
 		for (int i = 0; i < testList.size(); i++) {
 			twoDArrayList.add(splitLine(testList.get(i)));
 		}
-
+		
 		for (int i = 0; i < testList.size(); i++) {
 			String currentTemp1 = twoDArrayList.get(i).get(0);
 

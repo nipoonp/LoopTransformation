@@ -13,6 +13,8 @@ public class Skewing extends Generic  {
 		
 		ArrayList<ArrayList<String>> outputArrayList = new ArrayList<ArrayList<String>>();
 
+		System.out.println(stringsArrayList);
+		
 		if ((test2DI(stringsArrayList.get(4)) == true) && (test2DJ(stringsArrayList.get(4)) == true)) {
 			System.out.println("skewing...");
 		} else {

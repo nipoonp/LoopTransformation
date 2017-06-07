@@ -21,6 +21,7 @@ public class Interchange extends Generic  {
 		} else {
 			ArrayList<String> o = new ArrayList<String>();
 			o.add("Cannot Interchange!");
+			stringsArrayList = new ArrayList<ArrayList<String>>();
 			stringsArrayList.add(o);
 			return stringsArrayList;
 		}
