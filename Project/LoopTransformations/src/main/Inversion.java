@@ -81,11 +81,12 @@ public class Inversion extends Generic  {
 		}
 		System.out.println("do{");
 		for (String z : NormalConditions) {
-			System.out.println(z);
+			outArrayList = new ArrayList<String>();
+			outArrayList.add(z);
+			outputArrayList.add(outArrayList);
 		}
 
 		if (while_Found == 1) {
-			System.out.println("} while (" + whileLoopContents + ") ;");
 			outArrayList = new ArrayList<String>();
 			outArrayList.add("} while (" + whileLoopContents + ") ;");
 			outputArrayList.add(outArrayList);
