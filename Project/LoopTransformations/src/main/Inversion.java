@@ -1,6 +1,6 @@
 package main;
 
-public class Inversion {
+public class Inversion extends Generic  {
 
 	public Inversion() {
 		// TODO Auto-generated constructor stub

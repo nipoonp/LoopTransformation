@@ -1,6 +1,6 @@
 package main;
 
-public class Fusion {
+public class Fusion extends Generic {
 
 	public Fusion() {
 		// TODO Auto-generated constructor stub

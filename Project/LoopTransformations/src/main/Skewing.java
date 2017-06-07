@@ -1,6 +1,6 @@
 package main;
 
-public class Skewing {
+public class Skewing extends Generic  {
 
 	public Skewing() {
 		// TODO Auto-generated constructor stub

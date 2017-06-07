@@ -1,6 +1,6 @@
 package main;
 
-public class Reversal {
+public class Reversal  extends Generic {
 
 	public Reversal() {
 		// TODO Auto-generated constructor stub

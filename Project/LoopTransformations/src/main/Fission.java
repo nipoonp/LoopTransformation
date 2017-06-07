@@ -1,6 +1,6 @@
 package main;
 
-public class Fission {
+public class Fission extends Generic {
 
 	public Fission() {
 		// TODO Auto-generated constructor stub

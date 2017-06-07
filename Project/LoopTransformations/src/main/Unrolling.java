@@ -1,6 +1,6 @@
 package main;
 
-public class Unrolling {
+public class Unrolling extends Generic {
 
 	public Unrolling() {
 		// TODO Auto-generated constructor stub

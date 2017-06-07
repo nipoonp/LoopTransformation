@@ -1,6 +1,6 @@
 package main;
 
-public class Interchange {
+public class Interchange extends Generic  {
 
 	public Interchange() {
 		// TODO Auto-generated constructor stub
