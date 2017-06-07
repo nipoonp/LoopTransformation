@@ -50,6 +50,7 @@ public class GUI {
 	 */
 	private void initialize() {
 		frmLoopOptimization = new JFrame();
+		frmLoopOptimization.getContentPane().setBackground(Color.ORANGE);
 		frmLoopOptimization.setMaximumSize(new Dimension(1200, 700));
 		frmLoopOptimization.setMinimumSize(new Dimension(1200, 700));
 		frmLoopOptimization.setTitle("Loop Optimization");
@@ -143,7 +144,7 @@ public class GUI {
 
 		JButton FissionBtn = new JButton("Fission");
 		FissionBtn.setFont(new Font("Arial Black", Font.BOLD, 11));
-		FissionBtn.setForeground(Color.BLUE);
+		FissionBtn.setForeground(Color.BLACK);
 		FissionBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				startTransform(2);
@@ -215,7 +216,7 @@ public class GUI {
 
 		JButton InversionBtn = new JButton("Inversion");
 		InversionBtn.setFont(new Font("Arial Black", Font.BOLD, 11));
-		InversionBtn.setForeground(Color.BLUE);
+		InversionBtn.setForeground(Color.BLACK);
 		InversionBtn.setBounds(492, 524, 125, 43);
 		InversionBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
