@@ -14,42 +14,32 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.SwingWorker;
 
 public class GUI {
 
-	private JFrame frame;
+	JFrame frmLoopOptimization;
 	private JTextArea inputTextField;
 	private JTextArea outputTextField;
 	private String inputString;
+	boolean ArrayFound = false;
 	private JavaSyntaxChecker checker;
 	private ArrayList<ArrayList<String>> stringsArrayList = new ArrayList<ArrayList<String>>();
-
-	public static void main(String[] args) {
-
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI window = new GUI();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
 	 */
 	public GUI() {
-		// getDependencies();
 		initialize();
 	}
 
@@ -57,91 +47,234 @@ public class GUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 767, 477);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-
-		JButton btnTransform = new JButton("TRANSFORM");
-		btnTransform.setForeground(Color.BLACK);
-		btnTransform.setBackground(Color.RED);
-		btnTransform.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				write_to_file();
-			}
-		});
-		btnTransform.setBounds(413, 210, 106, 32);
-		frame.getContentPane().add(btnTransform);
+		frmLoopOptimization = new JFrame();
+		frmLoopOptimization.setMaximumSize(new Dimension(1200, 700));
+		frmLoopOptimization.setMinimumSize(new Dimension(1200, 700));
+		frmLoopOptimization.setTitle("Loop Optimization");
+		frmLoopOptimization.setResizable(false);
+		frmLoopOptimization.getContentPane().setFont(new Font("Arial Black", Font.BOLD, 11));
+		frmLoopOptimization.getContentPane().setForeground(new Color(0, 0, 0));
+		frmLoopOptimization.setBounds(100, 100, 856, 477);
+		frmLoopOptimization.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmLoopOptimization.getContentPane().setLayout(null);
 
 		inputTextField = new JTextArea();
-		Font font = new Font("Arial", Font.PLAIN, 20);
-		inputTextField.setFont(font);
-		inputTextField.setBounds(179, 43, 562, 156);
-		frame.getContentPane().add(inputTextField);
+		inputTextField.setBounds(10, 38, 440, 622);
+		frmLoopOptimization.getContentPane().add(inputTextField);
 		inputTextField.setColumns(10);
+		// ====================================================================================================================
+
+		// ====================================================================================================================
 
 		outputTextField = new JTextArea();
-		outputTextField.setBounds(179, 284, 562, 143);
-		frame.getContentPane().add(outputTextField);
+		outputTextField.setBounds(744, 38, 440, 622);
+		frmLoopOptimization.getContentPane().add(outputTextField);
 		outputTextField.setColumns(10);
 
-		JLabel inputTitle = new JLabel("INPUT CODE HERE");
-		inputTitle.setFont(new Font("Arial Black", Font.PLAIN, 15));
-		inputTitle.setBounds(378, 18, 165, 14);
-		frame.getContentPane().add(inputTitle);
+		JLabel inputTitle = new JLabel("INPUT CODE");
+		inputTitle.setForeground(Color.BLACK);
+		inputTitle.setFont(new Font("Arial Black", Font.BOLD, 15));
+		inputTitle.setBounds(159, 13, 125, 14);
+		frmLoopOptimization.getContentPane().add(inputTitle);
 
 		JLabel outputTitle = new JLabel("TRASFORMED RESULT");
-		outputTitle.setFont(new Font("Arial Black", Font.PLAIN, 15));
-		outputTitle.setBounds(361, 259, 199, 14);
-		frame.getContentPane().add(outputTitle);
+		outputTitle.setForeground(Color.BLACK);
+		outputTitle.setFont(new Font("Arial Black", Font.BOLD, 15));
+		outputTitle.setBounds(887, 13, 222, 14);
+		frmLoopOptimization.getContentPane().add(outputTitle);
 
-		JLabel unrollLabel = new JLabel("Unroll");
-		unrollLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
-		unrollLabel.setForeground(Color.BLUE);
-		unrollLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		unrollLabel.setBounds(23, 56, 46, 14);
-		frame.getContentPane().add(unrollLabel);
+		JButton Unroll_info = new JButton("?");
+		Unroll_info.setForeground(Color.BLUE);
+		Unroll_info.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		Unroll_info.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		Unroll_info.setBounds(660, 65, 50, 23);
+		frmLoopOptimization.getContentPane().add(Unroll_info);
 
-		JLabel unswitchLabel = new JLabel("Unswitch");
-		unswitchLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
-		unswitchLabel.setForeground(Color.BLUE);
-		unswitchLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		unswitchLabel.setBounds(23, 101, 61, 19);
-		frame.getContentPane().add(unswitchLabel);
+		JButton UnrollBtn = new JButton("Unroll");
+		UnrollBtn.setFont(new Font("Arial Black", Font.BOLD, 11));
+		UnrollBtn.setMinimumSize(new Dimension(100, 25));
+		UnrollBtn.setMaximumSize(new Dimension(100, 25));
+		UnrollBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				startTransform(0);
+			}
+		});
+		UnrollBtn.setForeground(Color.BLUE);
+		UnrollBtn.setBounds(492, 54, 125, 43);
+		frmLoopOptimization.getContentPane().add(UnrollBtn);
 
-		JLabel fusionLabel = new JLabel("Fusion");
-		fusionLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
-		fusionLabel.setBackground(new Color(240, 240, 240));
-		fusionLabel.setForeground(Color.BLUE);
-		fusionLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		fusionLabel.setBounds(23, 158, 46, 14);
-		frame.getContentPane().add(fusionLabel);
+		JButton InterchangeBtn = new JButton("Interchange");
+		InterchangeBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				startTransform(1);
+			}
+		});
+		InterchangeBtn.setMinimumSize(new Dimension(100, 25));
+		InterchangeBtn.setMaximumSize(new Dimension(100, 25));
+		InterchangeBtn.setForeground(Color.BLUE);
+		InterchangeBtn.setFont(new Font("Arial Black", Font.BOLD, 11));
+		InterchangeBtn.setBounds(492, 142, 125, 43);
+		frmLoopOptimization.getContentPane().add(InterchangeBtn);
 
-		JLabel fissionLabel = new JLabel("Fission");
-		fissionLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
-		fissionLabel.setForeground(Color.BLUE);
-		fissionLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		fissionLabel.setBounds(23, 210, 46, 14);
-		frame.getContentPane().add(fissionLabel);
+		JButton Interchange_info = new JButton("?");
+		Interchange_info.setForeground(Color.BLUE);
+		Interchange_info.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		Interchange_info.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		Interchange_info.setBounds(660, 152, 50, 23);
+		frmLoopOptimization.getContentPane().add(Interchange_info);
 
-		JLabel peelingLabel = new JLabel("Peeling");
-		peelingLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
-		peelingLabel.setForeground(Color.BLUE);
-		peelingLabel.setBounds(23, 261, 46, 14);
-		frame.getContentPane().add(peelingLabel);
+		JButton FissionBtn = new JButton("Fission");
+		FissionBtn.setFont(new Font("Arial Black", Font.BOLD, 11));
+		FissionBtn.setForeground(Color.BLUE);
+		FissionBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				startTransform(2);
+			}
+		});
+		FissionBtn.setBounds(492, 235, 125, 43);
+		frmLoopOptimization.getContentPane().add(FissionBtn);
 
-		JLabel loopInversionLabel = new JLabel("Loop Inversion");
-		loopInversionLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
-		loopInversionLabel.setForeground(Color.BLUE);
-		loopInversionLabel.setBounds(23, 313, 91, 14);
-		frame.getContentPane().add(loopInversionLabel);
+		JButton Fission_info = new JButton("?");
+		Fission_info.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		Fission_info.setForeground(Color.BLUE);
+		Fission_info.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		Fission_info.setBounds(660, 245, 50, 23);
+		frmLoopOptimization.getContentPane().add(Fission_info);
 
-		JLabel ReversalLabel = new JLabel("Loop Reversal");
-		ReversalLabel.setForeground(Color.BLUE);
-		ReversalLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
-		ReversalLabel.setBounds(23, 366, 82, 14);
-		frame.getContentPane().add(ReversalLabel);
+		JButton FusionBtn = new JButton("Fusion");
+		FusionBtn.setFont(new Font("Arial Black", Font.BOLD, 11));
+		FusionBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				startTransform(3);
+			}
+		});
+		FusionBtn.setForeground(Color.BLUE);
+		FusionBtn.setBounds(492, 335, 125, 43);
+		frmLoopOptimization.getContentPane().add(FusionBtn);
+
+		JButton Fusion_info = new JButton("?");
+		Fusion_info.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		Fusion_info.setForeground(Color.BLUE);
+		Fusion_info.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		Fusion_info.setBounds(660, 345, 50, 23);
+		frmLoopOptimization.getContentPane().add(Fusion_info);
+
+		JButton SkewingBtn = new JButton("Skewing");
+		SkewingBtn.setFont(new Font("Arial Black", Font.BOLD, 11));
+		SkewingBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				startTransform(4);
+			}
+		});
+		SkewingBtn.setForeground(Color.BLUE);
+		SkewingBtn.setBounds(492, 431, 125, 43);
+		frmLoopOptimization.getContentPane().add(SkewingBtn);
+
+		JButton btnNewButton_5 = new JButton("?");
+		btnNewButton_5.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnNewButton_5.setForeground(Color.BLUE);
+		btnNewButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_5.setBounds(660, 441, 50, 23);
+		frmLoopOptimization.getContentPane().add(btnNewButton_5);
+
+		JButton InversionBtn = new JButton("Inversion");
+		InversionBtn.setFont(new Font("Arial Black", Font.BOLD, 11));
+		InversionBtn.setForeground(Color.BLUE);
+		InversionBtn.setBounds(492, 524, 125, 43);
+		InversionBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				startTransform(5);
+			}
+		});
+		frmLoopOptimization.getContentPane().add(InversionBtn);
+
+		JButton Inversion_info = new JButton("?");
+		Inversion_info.setForeground(Color.BLUE);
+		Inversion_info.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		Inversion_info.setBounds(660, 534, 50, 23);
+		frmLoopOptimization.getContentPane().add(Inversion_info);
+
+		JButton ReversalBtn = new JButton("Reversal");
+		ReversalBtn.setFont(new Font("Arial Black", Font.BOLD, 11));
+		ReversalBtn.setForeground(Color.BLUE);
+		ReversalBtn.setBounds(492, 612, 125, 43);
+		ReversalBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				startTransform(6);
+			}
+		});
+		frmLoopOptimization.getContentPane().add(ReversalBtn);
+
+		JButton Reversal_info = new JButton("?");
+		Reversal_info.setForeground(Color.BLUE);
+		Reversal_info.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		Reversal_info.setBounds(660, 622, 50, 23);
+		frmLoopOptimization.getContentPane().add(Reversal_info);
+	}
+
+	private void startTransform(int x) {
+		// TODO Auto-generated method stub
+		System.out.println("start!");
+		SwingWorker<Boolean, Integer> worker = new SwingWorker<Boolean, Integer>(){
+
+			@Override
+			protected Boolean doInBackground() throws Exception {
+				// TODO Auto-generated method stub
+				
+				for(int i = 0; i < 3; i++){
+					Thread.sleep(1000);
+					System.out.println("Hello: " + i);
+					
+					publish(i);
+				}
+				return true;
+			}
+			
+			@Override
+			protected void process(List<Integer> chunks){
+				int value = chunks.get(chunks.size() -1);
+				
+				outputTextField.setText("CurrentValue: " + value);
+			}
+			
+			@Override
+			protected void done(){
+				try {
+					Boolean status = get();
+					outputTextField.setText("Completed! "+ x + " " + status);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ExecutionException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+						
+			}
+			
+		};
+		worker.execute();
 	}
 
 	private void processString(String inputString) {
@@ -177,40 +310,60 @@ public class GUI {
 
 		System.out.println(stringsArrayList);
 
-		// skewing();
-		// interchange();
-		// unrolling();
-		// inversion();
 		// fission();
-		fusion();
+		// fusion();
+		// interchange();
+		// inversion();
+		// unrolling();
+		// skewing();
+		reversal();
 	}
 
 	public void fission() {
 		int for_Found = 0;
 		String tempLine = "";
 
+		if (test(stringsArrayList.get(2), stringsArrayList.get(1))) {
+			System.out.println("cannot fission!");
+			return;
+		}
+
 		List<String> initilizerConditions = new ArrayList<String>();
 		List<String> NormalConditions = new ArrayList<String>();
 		String mainForLoop = "";
 
+		// Reading the text form the input text box.
 		inputString = inputTextField.getText();
+		// Divide the user input textbox by each line and storing each line in
+		// the String array called lines.
 		String[] lines = inputTextField.getText().split("\\n");
 
+		// iterating through each line the user has inputed.
 		for (int i = 0; i < (lines.length); i++) {
+			// removing all the white spaces from the line for easier
+			// manipulation of data.
 			tempLine = lines[i].replaceAll("\\s", "");
+
+			// if the for loop is found
 			if (tempLine.contains("for(")) {
+				// copy the contents of the for loop
 				mainForLoop = lines[i];
 				for_Found = 1;
 
+				// after the for loop is found take the normal conditions.
 			} else if ((for_Found == 1) && (!tempLine.contains("{")) && (!tempLine.contains("}"))) {
 				NormalConditions.add(lines[i]);
 			} else {
+				// get the initialization conditions.
 				if ((!tempLine.contains("{")) && (!tempLine.contains("}"))) {
 					initilizerConditions.add(lines[i]);
 				}
-
 			}
 		}
+
+		// printing the data so that the initialization variables are first,
+		// then the optimized structure below followed
+		// by the conditions.
 
 		for (String z : initilizerConditions) {
 			System.out.println(z);
@@ -221,7 +374,7 @@ public class GUI {
 			System.out.println(mainForLoop);
 			System.out.println("{");
 		}
-
+		// for each condition , print it in a seperate for loop.
 		int normalConditions_size = NormalConditions.size();
 		for (int z = 0; z < normalConditions_size; z++) {
 			System.out.println(NormalConditions.get(z));
@@ -246,9 +399,9 @@ public class GUI {
 		// String K =
 		// Character.toString(getIterationVariable(stringsArrayList.get(1).get(0)));
 
-		ArrayList<String> add = new ArrayList<String>();
-		add.add("}");
-		stringsArrayList.add(add);
+		// ArrayList<String> add = new ArrayList<String>();
+		// add.add("}");
+		// stringsArrayList.add(add);
 
 		for (int i = 1; i < stringsArrayList.size(); i += 4) {
 			for (int j = i + 4; j < stringsArrayList.size(); j += 4) {
@@ -257,29 +410,31 @@ public class GUI {
 					continue;
 				}
 				if (checkIfEqual(stringsArrayList.get(i).get(0), (stringsArrayList.get(j)).get(0))) {
-					System.out.println(stringsArrayList.get(i) + " " + (stringsArrayList.get(j)));
+					// System.out.println(stringsArrayList.get(i) + " " +
+					// (stringsArrayList.get(j)));
 
 					ArrayList<String> testArrayList = new ArrayList<String>();
 					testArrayList.add(stringsArrayList.get(i + 1).get(0));
 					testArrayList.add(stringsArrayList.get(j + 1).get(0));
-					System.out.println(testArrayList);
+					// System.out.println(testArrayList);
 
-					System.out.println(test(testArrayList,stringsArrayList.get(i)));
-					if (test(testArrayList,stringsArrayList.get(i))) {
+					// System.out.println(test(testArrayList,
+					// stringsArrayList.get(i)));
+					if (test(testArrayList, stringsArrayList.get(i))) {
 						continue;
 					}
 
 					// if(){
 					// stringsArrayList.set(i+1, stringsArrayList.get(i+1) +
 					// stringsArrayList.get(j+1));
-					System.out.println(stringsArrayList);
+					// System.out.println(stringsArrayList);
 					String stringToAdd = stringsArrayList.get(j + 1).get(0);
 					stringsArrayList.get(i + 1).add(0, stringToAdd);
 
 					stringsArrayList.get(j).clear();
 					stringsArrayList.get(j + 1).clear();
 					stringsArrayList.get(j + 2).clear();
-					System.out.println(stringsArrayList);
+					// System.out.println(stringsArrayList);
 
 					// }
 				}
@@ -287,6 +442,340 @@ public class GUI {
 			}
 		}
 
+		System.out.println(stringsArrayList);
+
+	}
+
+	private void interchange() {
+
+		if (test2DI(stringsArrayList.get(4)) == false) {
+			ArrayList<String> temp = stringsArrayList.get(1);
+			stringsArrayList.set(1, stringsArrayList.get(3));
+			stringsArrayList.set(3, temp);
+			System.out.println("Interchanging...");
+		} else {
+			System.out.println("Can't Interchange!");
+		}
+
+		System.out.println(stringsArrayList);
+		// test with 2D
+		// find if there is dependence in the i loops
+
+		// if there is no dependence in the i loops then apply the thing below
+
+	}
+
+	private void inversion() {
+		String whileLoopContents = "";
+		String[] forLoopSplit = new String[3];
+		int for_Found = 0;
+		int while_Found = 0;
+		List<String> NormalConditions = new ArrayList<String>();
+		List<String> initilizerConditions = new ArrayList<String>();
+		String tempLine = "";
+
+		// Reading the text form the input text box.
+		inputString = inputTextField.getText();
+		// Divide the user input textbox by each line and storing each line in
+		// the String array called lines.
+		String[] lines = inputTextField.getText().split("\\n");
+
+		// iterating through each line the user has inputed.
+		for (int i = 0; i < (lines.length); i++) {
+			// removing all the white spaces from the line for easier
+			// manipulation of data.
+			tempLine = lines[i].replaceAll("\\s", "");
+
+			// checking if the while statement has been found and if it has,
+			// collecting the relevant data needed form it.
+			if ((tempLine.contains("while("))) {
+				whileLoopContents = lines[i].substring(lines[i].indexOf("(") + 1, lines[i].indexOf(")"));
+				while_Found = 1;
+
+				// checking if the for loop has been found and if it has,
+				// collecting the relevant data needed form it.
+			} else if ((tempLine.contains("for("))) {
+				forLoopSplit = tempLine.split(";");
+				for_Found = 1;
+
+			} else if (((for_Found == 1) || (while_Found == 1)) && (!tempLine.contains("{"))
+					&& (!tempLine.contains("}"))) {
+				NormalConditions.add(lines[i]);
+
+			} else {
+				// storeing all the initilizations of variables before the
+				// for/while loop has been found.
+				if ((!tempLine.contains("{")) && (!tempLine.contains("}"))) {
+					initilizerConditions.add(lines[i]);
+				}
+			}
+		}
+
+		// printing the data so that the initialization variables are first,
+		// then the optimized structure below followed
+		// by the conditions.
+		for (String z : initilizerConditions) {
+			System.out.println(z);
+		}
+
+		System.out.println("\n");
+		if (while_Found == 1) {
+			System.out.println("if(" + whileLoopContents + "){");
+		} else if (for_Found == 1) {
+			System.out.println("if(" + forLoopSplit[1] + "){");
+		}
+		System.out.println("do{");
+		for (String z : NormalConditions) {
+			System.out.println(z);
+		}
+
+		if (while_Found == 1) {
+			System.out.println("} while (" + whileLoopContents + ") ;");
+		} else if (for_Found == 1) {
+			System.out.println("} while (" + forLoopSplit[1] + ") ;");
+		}
+		System.out.println("}");
+
+	}
+
+	private void unrolling() {
+		int forFound = 0;
+		int increment_var = 4;
+		int N_value_int = 0;
+		String unroll_letter = "";
+		String N_value = "";
+		String ForLoopSegments = "";
+		List<String> normalConditions = new ArrayList<String>();
+		List<String> remainderConditions = new ArrayList<String>();
+		List<String> initilizerConditions = new ArrayList<String>();
+		String tempLine = "";
+		int remainder = 0;
+
+		// Reading the text form the input text box.
+		inputString = inputTextField.getText();
+		// Divide the user input textbox by each line and storing each line in
+		// the String array called lines.
+		String[] lines = inputTextField.getText().split("\\n");
+
+		// iterating through each line the user has inputed.
+		for (int i = 0; i < (lines.length); i++) {
+			// removing all the white spaces from the line for easier
+			// manipulation of data.
+			tempLine = lines[i].replaceAll("\\s", "");
+
+			// if the for loop is found
+			if (tempLine.contains("for(")) {
+				// find the i_value
+				int result = tempLine.indexOf("++") - 1;
+				char unroll_letter_char = tempLine.charAt(result);
+				unroll_letter = Character.toString(unroll_letter_char);
+				// split the for loop at the ';' and store the 3 sections to
+				// manipulate data from them.
+				String[] ForLoopSplit = tempLine.split(";");
+
+				// finding the N value and storing it.
+				if (ForLoopSplit[1].contains("<")) {
+					N_value = ForLoopSplit[1].substring(ForLoopSplit[1].indexOf("<") + 1);
+				} else if (ForLoopSplit[1].contains("<=")) {
+					N_value = ForLoopSplit[1].substring(ForLoopSplit[1].indexOf("<=") + 1);
+				} else if (ForLoopSplit[1].contains("=")) {
+					N_value = ForLoopSplit[1].substring(ForLoopSplit[1].indexOf("=") + 1);
+				} else {
+					System.out.println("Check your For loop's syntax. Increment to N value must either be < , <= , = ");
+				}
+				N_value_int = Integer.parseInt(N_value);
+				ForLoopSegments = (lines[i].substring(0, lines[i].indexOf("++")) + "+=" + increment_var + ") {");
+				forFound = 1;
+
+				// if storing all the conditions once the for loop has been
+				// found.
+			} else if ((forFound == 1) && (!tempLine.contains("{")) && (!tempLine.contains("}"))) {
+				// store the conditions.
+				normalConditions.add(lines[i]);
+
+				// If the conditions have the unroll letter then perform the
+				// unroll.
+				for (int j = 1; j < increment_var; j++) {
+					// if the condition has the unroll character add a +1 to
+					// each unroll.
+					if (tempLine.contains(unroll_letter)) {
+						String replaced_increment = lines[i].replaceAll(unroll_letter, unroll_letter + "+" + j);
+						normalConditions.add(replaced_increment);
+					} else {
+						normalConditions.add(lines[i]);
+					}
+				}
+				// remainder conditions
+				remainder = N_value_int % increment_var;
+
+				for (int k = 0; k < remainder; k++) {
+					// if the condition has the unroll character add a +1 to
+					// each unroll.
+					if (tempLine.contains(unroll_letter)) {
+						String replaced_increment = lines[i].replaceAll(unroll_letter, unroll_letter + "+" + k);
+						remainderConditions.add(replaced_increment);
+					} else {
+						remainderConditions.add(lines[i]);
+					}
+				}
+
+			} else { // storing all the initializer conditions before the for
+						// loop.
+				if ((!tempLine.contains("{")) && (!tempLine.contains("}"))) {
+					initilizerConditions.add(lines[i]);
+				}
+			}
+		}
+
+		// printing the data so that the initialization variables are first,
+		// then the optimized structure below followed
+		// by the conditions. Any remaining/remainder conditions are placed
+		// after the loop.
+
+		for (String z : initilizerConditions) {
+			System.out.println(z);
+		}
+
+		System.out.println(ForLoopSegments);
+		System.out.println("{");
+		for (String z : normalConditions) {
+			System.out.println(z);
+		}
+		System.out.println("}");
+		for (String z : remainderConditions) {
+			System.out.println(z);
+		}
+
+	}
+
+	private void skewing() {
+
+		if ((test2DI(stringsArrayList.get(4)) == true) && (test2DJ(stringsArrayList.get(4)) == true)) {
+			System.out.println("skewing...");
+		} else {
+			System.out.println("cannot skew!");
+			return;
+		}
+
+		// first for loop
+		String I = Character.toString(getIterationVariable(stringsArrayList.get(1).get(0)));
+		String P = (getStartingIterationValue(stringsArrayList.get(1).get(0)));
+		String N = (getMaxIterationValue(stringsArrayList.get(1).get(0)));
+		String X = (getIterationIncrement(stringsArrayList.get(1).get(0)));
+
+		// second for loop
+		String J = Character.toString(getIterationVariable(stringsArrayList.get(3).get(0)));
+		String Q = (getStartingIterationValue(stringsArrayList.get(3).get(0)));
+		String M = (getMaxIterationValue(stringsArrayList.get(3).get(0)));
+		String Y = (getIterationIncrement(stringsArrayList.get(3).get(0)));
+
+		String Qplusplus = Integer.toString(Integer.parseInt(Q) + 1);
+		String MplusN = Integer.toString(Integer.parseInt(M) + Integer.parseInt(N));
+
+		stringsArrayList.get(1).set(0, ("for(intj=" + Qplusplus + ";j<" + MplusN + ";" + Y + "){"));
+		stringsArrayList.get(3).set(0,
+				("for(inti=Math.max(" + P + ",j-" + M + ");" + I + "<Math.min(" + N + ",j-1);" + X + "){"));
+		for (int ii = 0; ii < stringsArrayList.get(4).size(); ii++) {
+			stringsArrayList.get(4).set(ii, (stringsArrayList.get(4)).get(ii).replaceAll(J, "j-" + I));
+		}
+
+		System.out.println(stringsArrayList);
+
+	}
+
+	private void reversal() {
+		int for_Found = 0;
+		String tempLine = "";
+		String[] forLoopSplit = new String[3];
+		String i_value = "";
+		String N_value = "";
+		String initialValue = "";
+		boolean incrementing = true;
+
+		List<String> initilizerConditions = new ArrayList<String>();
+		List<String> NormalConditions = new ArrayList<String>();
+
+		// Reading the text form the input text box.
+		inputString = inputTextField.getText();
+		// Divide the user input textbox by each line and storing each line in
+		// the String array called lines.
+		String[] lines = inputTextField.getText().split("\\n");
+
+		// iterating through each line the user has inputed.
+		for (int i = 0; i < (lines.length); i++) {
+			// removing all the white spaces from the line for easier
+			// manipulation of data.
+			tempLine = lines[i].replaceAll("\\s", "");
+
+			// if a for loop is found.
+			if (tempLine.contains("for(")) {
+				// split the for loop at the ';' thus effectively into 3
+				// segments.
+				forLoopSplit = lines[i].split(";");
+
+				// finding the i value
+				int resultI = forLoopSplit[0].indexOf("=") - 1;
+				char i_value_char = forLoopSplit[0].charAt(resultI);
+				i_value = Character.toString(i_value_char);
+
+				// finding the N value
+				if (forLoopSplit[1].contains("<")) {
+					N_value = forLoopSplit[1].substring(forLoopSplit[1].indexOf("<") + 1);
+				} else if (forLoopSplit[1].contains("<=")) {
+					N_value = forLoopSplit[1].substring(forLoopSplit[1].indexOf("<=") + 1);
+				} else if (forLoopSplit[1].contains("=")) {
+					N_value = forLoopSplit[1].substring(forLoopSplit[1].indexOf("=") + 1);
+				} else {
+					System.out.println("Check your For loop's syntax. Increment to N value must either be < , <= , = ");
+				}
+
+				// finding initial value
+				initialValue = forLoopSplit[0].substring(forLoopSplit[0].indexOf("=") + 1, forLoopSplit[0].length());
+
+				// finding the if loop is incrementing or decrementing
+				if (forLoopSplit[2].contains("++")) {
+					incrementing = true;
+				} else if (forLoopSplit[2].contains("--")) {
+					incrementing = false;
+				} else {
+					System.out.println("Check your For loop's syntax. Increment to N value must either be < , <= , = ");
+				}
+
+				for_Found = 1;
+
+				// after a for loop is found storing the normal conditions.
+			} else if ((for_Found == 1) && (!tempLine.contains("{")) && (!tempLine.contains("}"))) {
+				NormalConditions.add(lines[i]);
+			} else {
+				// storing the initial conditions.
+				if ((!tempLine.contains("{")) && (!tempLine.contains("}"))) {
+					initilizerConditions.add(lines[i]);
+				}
+			}
+		}
+
+		// printing the data so that the initialization variables are first,
+		// then the optimized structure below followed
+		// by the conditions.
+
+		for (String z : initilizerConditions) {
+			System.out.println(z);
+		}
+
+		// if print the reversed for loop depending on if the original for loop
+		// was incrementing or decrementing.
+		if (incrementing == true) {
+			System.out.println("for (" + i_value + "=" + N_value + "-1; " + i_value + "<=" + initialValue + "; "
+					+ i_value + "--) {");
+		} else if (incrementing == false) {
+			System.out.println("for (" + i_value + "=" + N_value + "-1; " + i_value + "<=" + initialValue + "; "
+					+ i_value + "++) {");
+		}
+
+		for (String z : NormalConditions) {
+			System.out.println(z);
+		}
+		System.out.println("}");
 	}
 
 	private boolean checkIfEqual(String input, String input2) {
@@ -301,24 +790,6 @@ public class GUI {
 		input2 = input2.replaceAll(J, "");
 
 		return input.equalsIgnoreCase(input2);
-	}
-
-	private void interchange() {
-
-		if (test2DI(stringsArrayList.get(4)) == false) {
-			ArrayList<String> temp = stringsArrayList.get(1);
-			stringsArrayList.set(1, stringsArrayList.get(3));
-			stringsArrayList.set(3, temp);
-			System.out.println("Interchanging...");
-		} else {
-			System.out.println("Can't Interchange!");
-		}
-
-		// test with 2D
-		// find if there is dependence in the i loops
-
-		// if there is no dependence in the i loops then apply the thing below
-
 	}
 
 	public static char getIterationVariable(String word) {
@@ -376,150 +847,9 @@ public class GUI {
 		return input;
 	}
 
-	public static String getIterationIncrementOnly(String input){
+	public static String getIterationIncrementOnly(String input) {
 		input = getIterationIncrement(input);
 		return input.substring(input.indexOf(";") + 1);
-	}
-	
-	private void inversion() {
-		String whileLoopContents = "";
-		String[] forLoopSplit = new String[3];
-		int for_Found = 0;
-		int while_Found = 0;
-		List<String> NormalConditions = new ArrayList<String>();
-		List<String> initilizerConditions = new ArrayList<String>();
-		String tempLine = "";
-		
-		inputString = inputTextField.getText();				
-		String[] lines = inputTextField.getText().split("\\n");
-
-		for(int i = 0; i < (lines.length); i++){
-			tempLine=lines[i].replaceAll("\\s","");
-			
-			if ((tempLine.contains("while("))) {
-				whileLoopContents = lines[i].substring(lines[i].indexOf("(") + 1, lines[i].indexOf(")"));
-				while_Found = 1;
-				
-			}else if((tempLine.contains("for("))){
-				forLoopSplit = tempLine.split(";");
-				for_Found = 1;
-				
-			}else if (((for_Found == 1)||(while_Found == 1))&&(!tempLine.contains("{")) && (!tempLine.contains("}"))){
-				NormalConditions.add(lines[i]);
-				
-			}else{
-				if((!tempLine.contains("{")) && (!tempLine.contains("}"))){
-					initilizerConditions.add(lines[i]);	
-				}	
-			}
-		}
-
-	    for (String z : initilizerConditions) {
-	    	System.out.println(z);
-	    }
-	    
-	    System. out.println("\n");
-	    if(while_Found == 1){
-	    	System.out.println("if("+whileLoopContents+"){");
-	    }else if(for_Found == 1) {
-	    	System.out.println("if("+forLoopSplit[1]+"){");
-	    }
-	    System.out.println("do{");
-	    for (String z : NormalConditions) {
-	    	System.out.println(z);
-	    }
-	    
-	    if(while_Found == 1){
-	    	System.out.println("} while ("+whileLoopContents+") ;");
-	    }else if(for_Found == 1) {
-	    	System.out.println("} while ("+forLoopSplit[1]+") ;");
-	    }
-	    System.out.println("}");
-	}
-
-	private void unrolling() {
-		int For_notFound = 0;
-		int increment_var = 4;
-		int N_value_int = 0;
-		String unroll_letter = "";
-		String N_value = "";
-		String ForLoopSegments = "";
-		List<String> NormalConditions = new ArrayList<String>();
-
-		inputString = inputTextField.getText();
-		String[] lines = inputTextField.getText().split("\\n");
-
-		for (int i = 0; i < (lines.length); i++) {
-			if ((lines[i].contains("for (")) || (lines[i].contains("for("))) {
-				int result = lines[i].indexOf("++") - 1;
-				char unroll_letter_char = lines[i].charAt(result);
-				unroll_letter = Character.toString(unroll_letter_char);
-				String[] ForLoopSplit = lines[i].split(";");
-
-				if (ForLoopSplit[1].contains("<")) {
-					N_value = ForLoopSplit[1].substring(ForLoopSplit[1].indexOf("<") + 1);
-				} else if (ForLoopSplit[1].contains("<=")) {
-					N_value = ForLoopSplit[1].substring(ForLoopSplit[1].indexOf("<=") + 1);
-				} else if (ForLoopSplit[1].contains("=")) {
-					N_value = ForLoopSplit[1].substring(ForLoopSplit[1].indexOf("=") + 1);
-				} else {
-					System.out.println("Check your For loop's syntax. Increment to N value must either be < , <= , = ");
-				}
-				N_value_int = Integer.parseInt(N_value);
-				ForLoopSegments = (lines[i].substring(0, lines[i].indexOf("++")) + "+=" + increment_var + ")");
-				For_notFound = 1;
-
-			} else if ((For_notFound == 1) && (!lines[i].contains("{")) && (!lines[i].contains("}"))) {
-				NormalConditions.add(lines[i]);
-				for (int j = 1; j < increment_var; j++) {
-					String replaced_increment = lines[i].replaceAll(unroll_letter, unroll_letter + "+" + j);
-					NormalConditions.add(replaced_increment);
-				}
-			}
-		}
-
-		System.out.println(ForLoopSegments);
-		System.out.println("{");
-		for (String z : NormalConditions) {
-			System.out.println(z);
-		}
-		System.out.println("}");
-
-	}
-
-	private void skewing() {
-
-		if ((test2DI(stringsArrayList.get(4)) == true) && (test2DJ(stringsArrayList.get(4)) == true)) {
-			System.out.println("skewing...");
-		} else {
-			System.out.println("cannot skew!");
-			return;
-		}
-
-		// first for loop
-		String I = Character.toString(getIterationVariable(stringsArrayList.get(1).get(0)));
-		String P = (getStartingIterationValue(stringsArrayList.get(1).get(0)));
-		String N = (getMaxIterationValue(stringsArrayList.get(1).get(0)));
-		String X = (getIterationIncrement(stringsArrayList.get(1).get(0)));
-
-		// second for loop
-		String J = Character.toString(getIterationVariable(stringsArrayList.get(3).get(0)));
-		String Q = (getStartingIterationValue(stringsArrayList.get(3).get(0)));
-		String M = (getMaxIterationValue(stringsArrayList.get(3).get(0)));
-		String Y = (getIterationIncrement(stringsArrayList.get(3).get(0)));
-
-		String Qplusplus = Integer.toString(Integer.parseInt(Q) + 1);
-		String MplusN = Integer.toString(Integer.parseInt(M) + Integer.parseInt(N));
-
-		stringsArrayList.get(1).set(0, ("for(intj=" + Qplusplus + ";j<" + MplusN + ";" + Y + "){"));
-		stringsArrayList.get(3).set(0,
-				("for(inti=Math.max(" + P + ",j-" + M + ");" + I + "<Math.min(" + N + ",j-1);" + X + "){"));
-		for (int ii = 0; ii < stringsArrayList.get(4).size(); ii++) {
-			stringsArrayList.get(4).set(ii, (stringsArrayList.get(4)).get(ii).replaceAll(J, "j-" + I));
-		}
-
-		System.out.println(stringsArrayList);
-
 	}
 
 	private void write_to_file() {
@@ -542,7 +872,9 @@ public class GUI {
 			out.println("int[][] x = new int[100][100];");
 			out.println("int[][] y = new int[100][100];");
 			out.println("int[][] z = new int[100][100];");
-
+			out.println("int i=0;");
+			out.println("int j=0;");
+			out.println("int k=0;");
 			out.println("\n");
 			out.println("\n");
 
@@ -564,47 +896,47 @@ public class GUI {
 
 		List<String> errorMessages = JavaSyntaxChecker.check("Loop_to_check.java");
 		if (!(errorMessages.isEmpty())) {
-			JOptionPane.showMessageDialog(frame, errorMessages);
+			JOptionPane.showMessageDialog(frmLoopOptimization, errorMessages);
 		}
 
 	}
 
-	private static boolean checkBounds(String currentTemp1, String currentTemp2, String forLine){
+	private static boolean checkBounds(String currentTemp1, String currentTemp2, String forLine) {
 
-//		String input = getIterationIncrement(forLine);
-//		input = input.substring(input.indexOf(";") + 1);
-//		System.out.println(input);
-//		
-//		for(int i = 0; i < 10; i = i/1){
-//			
-//		}
+		// String input = getIterationIncrement(forLine);
+		// input = input.substring(input.indexOf(";") + 1);
+		// System.out.println(input);
+		//
+		// for(int i = 0; i < 10; i = i/1){
+		//
+		// }
 
-//		System.out.println(currentTemp1 + " " + currentTemp2);
-		currentTemp1 = currentTemp1.substring(currentTemp1.indexOf("[")+1,currentTemp1.indexOf("]"));
-		currentTemp2 = currentTemp2.substring(currentTemp2.indexOf("[")+1,currentTemp2.indexOf("]"));
+		// System.out.println(currentTemp1 + " " + currentTemp2);
+		currentTemp1 = currentTemp1.substring(currentTemp1.indexOf("[") + 1, currentTemp1.indexOf("]"));
+		currentTemp2 = currentTemp2.substring(currentTemp2.indexOf("[") + 1, currentTemp2.indexOf("]"));
 
-		
-		
 		int inc = 0;
-		
-		if (getIterationIncrementOnly(forLine).contains("++")){
+
+		if (getIterationIncrementOnly(forLine).contains("++")) {
 			inc = 1;
-		} else if (getIterationIncrementOnly(forLine).contains("--")){
+		} else if (getIterationIncrementOnly(forLine).contains("--")) {
 			inc = -1;
-		} else if ((getIterationIncrementOnly(forLine).contains("+="))){
-			inc = Integer.parseInt((getIterationIncrementOnly(forLine)).substring(getIterationIncrementOnly(forLine).indexOf("=") + 1));
-		} else if ((getIterationIncrementOnly(forLine).contains("-="))){
-			inc = Integer.parseInt((getIterationIncrementOnly(forLine)).substring(getIterationIncrementOnly(forLine).indexOf("=") + 1));
+		} else if ((getIterationIncrementOnly(forLine).contains("+="))) {
+			inc = Integer.parseInt((getIterationIncrementOnly(forLine))
+					.substring(getIterationIncrementOnly(forLine).indexOf("=") + 1));
+		} else if ((getIterationIncrementOnly(forLine).contains("-="))) {
+			inc = Integer.parseInt((getIterationIncrementOnly(forLine))
+					.substring(getIterationIncrementOnly(forLine).indexOf("=") + 1));
 		}
-		
-		
+
 		ScriptEngineManager mgr = new ScriptEngineManager();
 		ScriptEngine engine = mgr.getEngineByName("JavaScript");
-		
+
 		int a1[] = new int[Integer.parseInt(getMaxIterationValue(forLine))];
 		int a2[] = new int[Integer.parseInt(getMaxIterationValue(forLine))];
-		
-		for (int i = Integer.parseInt(getStartingIterationValue(forLine)); i < Integer.parseInt(getMaxIterationValue(forLine)); i+=inc){
+
+		for (int i = Integer.parseInt(getStartingIterationValue(forLine)); i < Integer
+				.parseInt(getMaxIterationValue(forLine)); i += inc) {
 			try {
 				a1[i] = ((int) engine.eval(currentTemp1.replaceAll("i", Integer.toString(i))));
 				a2[i] = ((int) engine.eval(currentTemp2.replaceAll("i", Integer.toString(i))));
@@ -612,100 +944,43 @@ public class GUI {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
-		return findDupes(a1,a2);
+		return findDupes(a1, a2);
 	}
-	
+
 	private static boolean findDupes(int[] a, int[] b) {
-	    HashSet<Integer> map = new HashSet<Integer>();
-	    for (int i : a)
-	        map.add(i);
-	    for (int i : b) {
-	        if (map.contains(i))
-//	        	System.out.println("leanign....")s;
-	        	return true;
-	            // found duplicate!   
-	    }
-	    
-	    return false;
-	}
-	
-	
-	private void reversal() {
-		int for_Found = 0;
-		String tempLine = "";
-		String[] forLoopSplit = new String[3];
-		String i_value = "";
-		String N_value = "";
-		String initialValue = "";
-		boolean incrementing = true;
 
-		List<String> initilizerConditions = new ArrayList<String>();
-		List<String> NormalConditions = new ArrayList<String>();
+		int temp1 = 0;
+		int temp2 = 0;
 
-		inputString = inputTextField.getText();
-		String[] lines = inputTextField.getText().split("\\n");
+		for (int i = 0; i < a.length; i++) {
+			temp1 = a[i];
+			for (int j = 0; j < b.length; j++) {
+				temp2 = b[j];
 
-		for (int i = 0; i < (lines.length); i++) {
-			tempLine = lines[i].replaceAll("\\s", "");
-			if (tempLine.contains("for(")) {
-				forLoopSplit = lines[i].split(";");
-
-				// finding the i value
-				int resultI = forLoopSplit[0].indexOf("=") - 1;
-				char i_value_char = forLoopSplit[0].charAt(resultI);
-				i_value = Character.toString(i_value_char);
-
-				// finding the N value
-				if (forLoopSplit[1].contains("<")) {
-					N_value = forLoopSplit[1].substring(forLoopSplit[1].indexOf("<") + 1);
-				} else if (forLoopSplit[1].contains("<=")) {
-					N_value = forLoopSplit[1].substring(forLoopSplit[1].indexOf("<=") + 1);
-				} else if (forLoopSplit[1].contains("=")) {
-					N_value = forLoopSplit[1].substring(forLoopSplit[1].indexOf("=") + 1);
-				} else {
-					System.out.println("Check your For loop's syntax. Increment to N value must either be < , <= , = ");
-				}
-
-				// finding initial value
-				initialValue = forLoopSplit[0].substring(forLoopSplit[0].indexOf("=") + 1, forLoopSplit[0].length());
-
-				// finding the if loop is incrementing or decrementing
-				if (forLoopSplit[2].contains("++")) {
-					incrementing = true;
-				} else if (forLoopSplit[2].contains("--")) {
-					incrementing = false;
-				} else {
-					System.out.println("Check your For loop's syntax. Increment to N value must either be < , <= , = ");
-				}
-
-				for_Found = 1;
-
-			} else if ((for_Found == 1) && (!tempLine.contains("{")) && (!tempLine.contains("}"))) {
-				NormalConditions.add(lines[i]);
-			} else {
-				if ((!tempLine.contains("{")) && (!tempLine.contains("}"))) {
-					initilizerConditions.add(lines[i]);
+				if (temp1 == temp2) {
+					// if (i < j) {
+					// System.out.println(x);
+					// }
+					// System.out.println(arg0);
+					return true;
+					// }
 				}
 			}
 		}
 
-		for (String z : initilizerConditions) {
-			System.out.println(z);
-		}
+		// HashSet<Integer> map = new HashSet<Integer>();
+		// for (int i : a)
+		// map.add(i);
+		// for (int i : b) {
+		// if (map.contains(i))
+		// // System.out.println("leanign....")s;
+		// return true;
+		// // found duplicate!
+		// }
 
-		if (incrementing == true) {
-			System.out.println("for (" + i_value + "=" + N_value + "-1; " + i_value + "<=" + initialValue + "; "
-					+ i_value + "--) {");
-		} else if (incrementing == false) {
-			System.out.println("for (" + i_value + "=" + N_value + "-1; " + i_value + "<=" + initialValue + "; "
-					+ i_value + "++) {");
-		}
-
-		for (String z : NormalConditions) {
-			System.out.println(z);
-		}
+		return false;
 	}
 
 	private static ArrayList<String> splitLine(String string) {
@@ -965,15 +1240,12 @@ public class GUI {
 					returned = (calculate_gcd_dependence(getGCDParams_forI(currentTemp1),
 							getGCDParams_forI(currentTemp2)));
 					if (returned) {
-						long startTime = System.nanoTime();
-						boolean r = checkBounds(currentTemp1, currentTemp2, forLine.get(0));
-						long endTime = System.nanoTime();
-
-						System.out.println((endTime - startTime)/(double)1000000000); 
-						
-						tru++;
+						if (checkBounds(currentTemp1, currentTemp2, forLine.get(0))) {
+							return true;
+						}
+						// tru++;
 					} else {
-						fals++;
+						// fals++;
 					}
 					// System.out.println(currentTemp1 + " " + currentTemp2);
 					// System.out.println(calculate_gcd_dependence(getGCDParams_forI(currentTemp1),
@@ -981,13 +1253,16 @@ public class GUI {
 				}
 			}
 		}
-		if (tru > 0) {
-			return true;
-		} else {
-			return false;
-		}
 
+		// if (tru > 0) {
+		// return true;
+		// } else {
+		// return false;
+		// }
+
+		return false;
 	}
+
 	private static boolean test2DI(ArrayList<String> testList) {
 
 		ArrayList<ArrayList<String>> twoDArrayList = new ArrayList<ArrayList<String>>();
