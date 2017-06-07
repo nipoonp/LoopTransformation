@@ -113,8 +113,8 @@ public class GUI extends JPanel{
 				Mew = new JFrame();
 				ImageIcon image = new ImageIcon(this.getClass().getResource("/images/Unrolling.jpg"));
 				Mew.setTitle("Unrolling Image");
-				Mew.setResizable(false);
-				Mew.setBounds(100, 100, image.getIconHeight(), image.getIconWidth());
+				Mew.setResizable(true);
+				Mew.setBounds(0, 0, image.getIconHeight(), image.getIconWidth());
 				Mew.setVisible( true ); 
 				Mew.add(new JLabel(image));
 			}
