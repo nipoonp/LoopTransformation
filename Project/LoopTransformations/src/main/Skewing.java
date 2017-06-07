@@ -15,7 +15,7 @@ public class Skewing extends Generic  {
 
 		System.out.println(stringsArrayList);
 		
-		if ((test2DI(stringsArrayList.get(4)) == true) && (test2DJ(stringsArrayList.get(4)) == true)) {
+		if ((test2DI(stringsArrayList.get(4),stringsArrayList.get(1)) == true) && (test2DJ(stringsArrayList.get(4),stringsArrayList.get(3)) == true)) {
 			System.out.println("skewing...");
 		} else {
 			System.out.println("cannot skew!");

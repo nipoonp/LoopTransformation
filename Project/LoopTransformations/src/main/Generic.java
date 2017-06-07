@@ -115,18 +115,12 @@ public class Generic {
 
 	private boolean checkBounds(String currentTemp1, String currentTemp2, String forLine) {
 
-		// String input = getIterationIncrement(forLine);
-		// input = input.substring(input.indexOf(";") + 1);
-		// System.out.println(input);
-		//
-		// for(int i = 0; i < 10; i = i/1){
-		//
-		// }
-
-		// System.out.println(currentTemp1 + " " + currentTemp2);
 		currentTemp1 = currentTemp1.substring(currentTemp1.indexOf("[") + 1, currentTemp1.indexOf("]"));
 		currentTemp2 = currentTemp2.substring(currentTemp2.indexOf("[") + 1, currentTemp2.indexOf("]"));
 
+		System.out.println("-----------");
+		System.out.println(currentTemp1 + " " + currentTemp2 + " " + forLine);
+		System.out.println("---------------");
 		int inc = 0;
 
 		if (getIterationIncrementOnly(forLine).contains("++")) {
@@ -176,22 +170,14 @@ public class Generic {
 					// System.out.println(x);
 					// }
 					// System.out.println(arg0);
+					System.out.println("true---");
 					return true;
 					// }
 				}
 			}
 		}
 
-		// HashSet<Integer> map = new HashSet<Integer>();
-		// for (int i : a)
-		// map.add(i);
-		// for (int i : b) {
-		// if (map.contains(i))
-		// // System.out.println("leanign....")s;
-		// return true;
-		// // found duplicate!
-		// }
-
+		System.out.println("false---");
 		return false;
 	}
 
@@ -412,26 +398,12 @@ public class Generic {
 
 	protected boolean test(ArrayList<String> testList, ArrayList<String> forLine) {
 
-		// ArrayList<String> testList = new ArrayList<String>();
 		ArrayList<ArrayList<String>> twoDArrayList = new ArrayList<ArrayList<String>>();
-		int tru = 0;
-		int fals = 0;
 		boolean returned;
-		//
-		// String input1 = "a[2*i+1]=a[7*i+4]+3";
-		// String input2 = "b[3*i+5]=a[i+2]+3";
-		// String input3 = "c[i+5]=b[4*i+2]+3";
-		//
-		// testList.add(input1);
-		// testList.add(input2);
-		// testList.add(input3);
-		//
+		
 		for (int i = 0; i < testList.size(); i++) {
 			twoDArrayList.add(splitLine(testList.get(i)));
 		}
-
-		// System.out.println(twoDArrayList);
-
 		for (int i = 0; i < testList.size(); i++) {
 			String currentTemp1 = twoDArrayList.get(i).get(0);
 
@@ -455,27 +427,15 @@ public class Generic {
 						if (checkBounds(currentTemp1, currentTemp2, forLine.get(0))) {
 							return true;
 						}
-						// tru++;
-					} else {
-						// fals++;
 					}
-					// System.out.println(currentTemp1 + " " + currentTemp2);
-					// System.out.println(calculate_gcd_dependence(getGCDParams_forI(currentTemp1),
-					// getGCDParams_forI(currentTemp2)));
 				}
 			}
 		}
 
-		// if (tru > 0) {
-		// return true;
-		// } else {
-		// return false;
-		// }
-
 		return false;
 	}
 
-	protected boolean test2DI(ArrayList<String> testList) {
+	protected boolean test2DI(ArrayList<String> testList, ArrayList<String> forLine) {
 
 		ArrayList<ArrayList<String>> twoDArrayList = new ArrayList<ArrayList<String>>();
 		int tru = 0;
@@ -501,25 +461,19 @@ public class Generic {
 					returned = (calculate_gcd_dependence(getGCDParams_forI(currentTemp1),
 							getGCDParams_forI(currentTemp2)));
 					if (returned) {
-						tru++;
-					} else {
-						fals++;
+						if (checkBounds(currentTemp1, currentTemp2, forLine.get(0))) {
+							return true;
+						}
 					}
 				}
 			}
 		}
-		if (tru > 0) {
-			return true;
-		} else {
-			return false;
-		}
+		return false;
 	}
 
-	protected boolean test2DJ(ArrayList<String> testList) {
+	protected boolean test2DJ(ArrayList<String> testList, ArrayList<String> forLine) {
 
 		ArrayList<ArrayList<String>> twoDArrayList = new ArrayList<ArrayList<String>>();
-		int tru = 0;
-		int fals = 0;
 		boolean returned;
 		for (int i = 0; i < testList.size(); i++) {
 			twoDArrayList.add(splitLine(testList.get(i)));
@@ -542,18 +496,14 @@ public class Generic {
 					returned = (calculate_gcd_dependence(getGCDParams_forJ(currentTemp1),
 							getGCDParams_forJ(currentTemp2)));
 					if (returned) {
-						tru++;
-					} else {
-						fals++;
+						if (checkBounds(currentTemp1, currentTemp2, forLine.get(0))) {
+							return true;
+						}
 					}
 				}
 			}
 		}
-		if (tru > 0) {
-			return true;
-		} else {
-			return false;
-		}
+		return false;
 	}
 
 	private boolean calculate_gcd_dependence(ArrayList<String> s1, ArrayList<String> s2) {
