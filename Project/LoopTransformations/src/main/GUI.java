@@ -87,7 +87,7 @@ public class GUI {
 		JLabel outputTitle = new JLabel("TRASFORMED RESULT");
 		outputTitle.setForeground(Color.BLACK);
 		outputTitle.setFont(new Font("Arial Black", Font.BOLD, 15));
-		outputTitle.setBounds(887, 13, 222, 14);
+		outputTitle.setBounds(853, 13, 222, 14);
 		frmLoopOptimization.getContentPane().add(outputTitle);
 
 		JButton Unroll_info = new JButton("?");
@@ -97,7 +97,7 @@ public class GUI {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		Unroll_info.setBounds(660, 65, 50, 23);
+		Unroll_info.setBounds(660, 264, 50, 23);
 		frmLoopOptimization.getContentPane().add(Unroll_info);
 
 		JButton UnrollBtn = new JButton("Unroll");
@@ -110,7 +110,7 @@ public class GUI {
 			}
 		});
 		UnrollBtn.setForeground(Color.BLACK);
-		UnrollBtn.setBounds(492, 54, 125, 43);
+		UnrollBtn.setBounds(492, 253, 125, 43);
 		frmLoopOptimization.getContentPane().add(UnrollBtn);
 		Border UnrollBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
 		UnrollBtn.setBorder(UnrollBorder);
@@ -126,7 +126,7 @@ public class GUI {
 		InterchangeBtn.setMaximumSize(new Dimension(100, 25));
 		InterchangeBtn.setForeground(Color.BLACK);
 		InterchangeBtn.setFont(new Font("Arial Black", Font.BOLD, 11));
-		InterchangeBtn.setBounds(492, 142, 125, 43);
+		InterchangeBtn.setBounds(492, 341, 125, 43);
 		frmLoopOptimization.getContentPane().add(InterchangeBtn);
 		Border InterchangeBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
 		InterchangeBtn.setBorder(InterchangeBorder);
@@ -139,7 +139,7 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		Interchange_info.setBounds(660, 152, 50, 23);
+		Interchange_info.setBounds(660, 351, 50, 23);
 		frmLoopOptimization.getContentPane().add(Interchange_info);
 
 		JButton FissionBtn = new JButton("Fission");
@@ -150,7 +150,7 @@ public class GUI {
 				startTransform(2);
 			}
 		});
-		FissionBtn.setBounds(492, 235, 125, 43);
+		FissionBtn.setBounds(492, 53, 125, 43);
 		frmLoopOptimization.getContentPane().add(FissionBtn);
 		Border FissionBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
 		FissionBtn.setBorder(FissionBorder);
@@ -163,7 +163,7 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		Fission_info.setBounds(660, 245, 50, 23);
+		Fission_info.setBounds(660, 63, 50, 23);
 		frmLoopOptimization.getContentPane().add(Fission_info);
 
 		JButton FusionBtn = new JButton("Fusion");
@@ -174,7 +174,7 @@ public class GUI {
 			}
 		});
 		FusionBtn.setForeground(Color.BLACK);
-		FusionBtn.setBounds(492, 335, 125, 43);
+		FusionBtn.setBounds(492, 153, 125, 43);
 		frmLoopOptimization.getContentPane().add(FusionBtn);
 		Border FusionBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
 		FusionBtn.setBorder(FusionBorder);
@@ -187,7 +187,7 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		Fusion_info.setBounds(660, 345, 50, 23);
+		Fusion_info.setBounds(660, 163, 50, 23);
 		frmLoopOptimization.getContentPane().add(Fusion_info);
 
 		JButton SkewingBtn = new JButton("Skewing");
