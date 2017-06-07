@@ -114,6 +114,7 @@ public class GUI extends JPanel{
 				Mew.setBounds(100, 100, 856, 477);
 				Mew.getContentPane().setLayout(null);
 				Mew.setVisible( true ); 
+				Mew.add(new JLabel(new ImageIcon("/LoopTransformations/src/main/Unrolling.jpg")));
 			}
 		});
 		Unroll_info.setBounds(660, 221, 50, 23);
