@@ -165,7 +165,7 @@ public class GUI extends JPanel{
 				InterchangeHelp = new JFrame();
 				ImageIcon InterchangeIcon = new ImageIcon(this.getClass().getResource("/images/Interchange.jpg"));
 				InterchangeHelp.setTitle("Interchage Image");
-				InterchangeHelp.setResizable(false);
+				InterchangeHelp.setResizable(true);
 				InterchangeHelp.setBounds(10,10, InterchangeIcon.getIconHeight(), InterchangeIcon.getIconWidth());
 				InterchangeHelp.setVisible( true ); 
 				InterchangeHelp.add(new JLabel(InterchangeIcon));
