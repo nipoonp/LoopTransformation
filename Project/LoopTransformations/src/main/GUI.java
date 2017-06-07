@@ -29,7 +29,6 @@ import javax.swing.JTextField;
 
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.SwingConstants;
@@ -49,6 +48,7 @@ public class GUI extends JPanel{
 	JFrame reversalHelp;
 	private JTextArea inputTextField;
 	private JTextArea outputTextField;
+	private JProgressBar progressBar;
 	private String inputString;
 	boolean ArrayFound = false;
 	private JavaSyntaxChecker checker;
@@ -333,7 +333,7 @@ public class GUI extends JPanel{
 		ReversalBtn.setBorder(ReversalBorder);
 		frmLoopOptimization.getContentPane().add(ReversalBtn);
 		
-		JProgressBar progressBar = new JProgressBar();
+		progressBar = new JProgressBar();
 		progressBar.setBounds(520, 631, 157, 14);
 		frmLoopOptimization.getContentPane().add(progressBar);
 		
@@ -350,7 +350,12 @@ public class GUI extends JPanel{
 			protected String doInBackground() throws Exception {
 				// TODO Auto-generated method stub
 				
-				ArrayList<ArrayList<String>> returnString = new ArrayList<ArrayList<String>>();
+				if(inputTextField.getText().isEmpty()){
+					return "Please type in a input.";
+				}
+				
+				ArrayList<ArrayList<String>> returnStringArrayList = new ArrayList<ArrayList<String>>();
+				String returnString = "";
 				
 				write_to_file();
 				
@@ -359,49 +364,49 @@ public class GUI extends JPanel{
 					 //code to be executed;   
 					Fission fission = new Fission();
 					publish("xoxo");
-					returnString = (fission.compute(stringsArrayList, inputString));
+					returnStringArrayList = (fission.compute(stringsArrayList, inputString));
 					
 				break;  //optional  
 				case 1:    
 					 //code to be executed;   
 					Fusion fusion = new Fusion();
 					publish("xoxo");
-					returnString = (fusion.compute(stringsArrayList, inputString));
+					returnStringArrayList = (fusion.compute(stringsArrayList, inputString));
 				break;  //optional  
 				case 2:    
 						 //code to be executed;  
 					Unrolling unrolling = new Unrolling();
 					publish("xoxo");
-					returnString = (unrolling.compute(stringsArrayList, inputString));
+					returnStringArrayList = (unrolling.compute(stringsArrayList, inputString));
 				break;  //optional  
 				case 3:    
 						 //code to be executed; 
 					Interchange interchange = new Interchange();
 					publish("xoxo");
-					returnString = (interchange.compute(stringsArrayList, inputString));
+					returnStringArrayList = (interchange.compute(stringsArrayList, inputString));
 				break;  //optional  
 				case 4:    
 							 //code to be executed;    
 					Skewing skewing = new Skewing();
 					publish("xoxo");
-					returnString = (skewing.compute(stringsArrayList, inputString));
+					returnStringArrayList = (skewing.compute(stringsArrayList, inputString));
 				break;  //optional  
 				case 5:    
 							 //code to be executed;    
 					Inversion inversion = new Inversion();
 					publish("xoxo");
-					returnString = (inversion.compute(stringsArrayList, inputString));
+					returnStringArrayList = (inversion.compute(stringsArrayList, inputString));
 				break;  //optional  
 				case 6:    
 								 //code to be executed;  
 					Reversal reversal = new Reversal();
 					publish("xoxo");
-					returnString = (reversal.compute(stringsArrayList, inputString));
+					returnStringArrayList = (reversal.compute(stringsArrayList, inputString));
 				break;  //optional  								    
 				default:      
 				}    
 				
-				
+				System.out.println(returnStringArrayList);
 				
 //				for(int i = 0; i < 3; i++){
 //					Thread.sleep(1000);
@@ -409,7 +414,15 @@ public class GUI extends JPanel{
 //					publish(i);
 //				}
 				
-				return returnString.toString();
+				for (int ii = 0; ii < returnStringArrayList.size(); ii++){
+//					returnStringArrayList.get(ii);
+					for (int jj = 0; jj < returnStringArrayList.get(ii).size(); jj++){
+						returnString += returnStringArrayList.get(ii).get(jj);
+						returnString += "\n";
+					}
+				}
+				
+				return returnString;
 			}
 			
 //			@Override
@@ -431,6 +444,7 @@ public class GUI extends JPanel{
 				try {
 					String status = get();
 					outputTextField.setText(status);
+					progressBar.setValue(100);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -491,7 +505,7 @@ public class GUI extends JPanel{
 
 		inputString = inputTextField.getText();
 		processString(inputString);
-		outputTextField.setText(inputString);
+		//outputTextField.setText(inputString);
 
 		try (FileWriter fw = new FileWriter("Loop_to_check.java", false);
 				BufferedWriter bw = new BufferedWriter(fw);

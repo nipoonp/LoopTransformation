@@ -62,8 +62,10 @@ public class Fusion extends Generic {
 			}
 		}
 
-		System.out.println(stringsArrayList);
-
+//		System.out.println(stringsArrayList);
+		ArrayList<String> brc = new ArrayList<String>();
+		brc.add("}");
+		stringsArrayList.add(brc);
 	
 		
 		return stringsArrayList;
