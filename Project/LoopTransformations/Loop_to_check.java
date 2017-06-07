@@ -15,11 +15,9 @@ int k=0;
 
 
 
-int offset = 55;
-for (i = 0; i < 300; i++){
-   for (j = 0; j < 300; j++){
-      x[i][j] = x[i][j] + offset;
-   }
+for (i=0; i<7; i++){
+	a[i]=b[i]+1;
+	c[i]=a[i]/2;
 }
 
 

@@ -13,7 +13,7 @@ public class Interchange extends Generic  {
 		
 		ArrayList<ArrayList<String>> outputArrayList = new ArrayList<ArrayList<String>>();
 
-		if (test2DI(stringsArrayList.get(4)) == false) {
+		if (test2DI(stringsArrayList.get(4),stringsArrayList.get(1)) == false) {
 			ArrayList<String> temp = stringsArrayList.get(1);
 			stringsArrayList.set(1, stringsArrayList.get(3));
 			stringsArrayList.set(3, temp);
