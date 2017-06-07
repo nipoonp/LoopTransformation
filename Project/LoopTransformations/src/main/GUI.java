@@ -29,7 +29,6 @@ import javax.swing.JTextField;
 
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.SwingConstants;
