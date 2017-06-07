@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.tools.Diagnostic;
+import javax.tools.Diagnostic.Kind;
 import javax.tools.DiagnosticCollector;
 import javax.tools.JavaCompiler;
 import javax.tools.JavaFileObject;
@@ -16,7 +17,7 @@ import org.eclipse.jdt.internal.compiler.tool.EclipseCompiler;
 
 public class JavaSyntaxChecker {
     public static void main(String[] args) {
-        System.out.println(JavaSyntaxChecker.check("Loop_to_check.java"));
+       JavaSyntaxChecker.check("Loop_to_check.java");
     }
 
     public static List<String> check(String file) {
@@ -33,9 +34,11 @@ public class JavaSyntaxChecker {
         List<String> messages = new ArrayList<String>();
         Formatter formatter = new Formatter();
         for (Diagnostic diagnostic : diagnostics.getDiagnostics()) {
-            messages.add(diagnostic.getKind() + ":\t Line [" + diagnostic.getLineNumber() + "] \t Position [" + diagnostic.getPosition() + "]\t" + diagnostic.getMessage(Locale.ROOT) + "\n");
+        	if (diagnostic.getKind() == Kind.WARNING){
+        		continue;
+        	}
+            messages.add(diagnostic.getKind() + ":\t Line [" + (diagnostic.getLineNumber()-14) + "] \t Position [" + diagnostic.getPosition() + "]\t" + diagnostic.getMessage(Locale.ROOT) + "\n");
         }
-
         return messages;
     }
 }
