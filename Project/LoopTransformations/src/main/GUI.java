@@ -270,12 +270,46 @@ public class GUI {
 			protected Boolean doInBackground() throws Exception {
 				// TODO Auto-generated method stub
 				
+				switch(x){    
+				case 0:    
+					 //code to be executed;   
+					Fission fission = new Fission();
+				break;  //optional  
+				case 1:    
+					 //code to be executed;   
+					Fusion fusion = new Fusion();
+				break;  //optional  
+				case 2:    
+						 //code to be executed;  
+					Unrolling unrolling = new Unrolling();
+				break;  //optional  
+				case 3:    
+						 //code to be executed; 
+					Interchange interchange = new Interchange();
+				break;  //optional  
+				case 4:    
+							 //code to be executed;    
+					Skewing skewing = new Skewing();
+				break;  //optional  
+				case 5:    
+							 //code to be executed;    
+					Inversion inversion = new Inversion();
+				break;  //optional  
+				case 6:    
+								 //code to be executed;  
+					Reversal reversal = new Reversal();
+				break;  //optional  								    
+				default:      
+				}    
+				
+				
+				
 				for(int i = 0; i < 3; i++){
 					Thread.sleep(1000);
-					System.out.println("Hello: " + i);
-					
+					//System.out.println("Hello: " + i);
 					publish(i);
 				}
+				
 				return true;
 			}
 			
