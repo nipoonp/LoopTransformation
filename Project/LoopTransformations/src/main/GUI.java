@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
@@ -25,6 +26,7 @@ import javax.swing.JTextArea;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
+import javax.swing.border.Border;
 
 public class GUI {
 
@@ -59,17 +61,21 @@ public class GUI {
 		frmLoopOptimization.getContentPane().setLayout(null);
 
 		inputTextField = new JTextArea();
-		inputTextField.setBounds(10, 38, 440, 622);
+		inputTextField.setBounds(25, 38, 440, 622);
 		frmLoopOptimization.getContentPane().add(inputTextField);
 		inputTextField.setColumns(10);
-		// ====================================================================================================================
+		Border inputBorder = BorderFactory.createLineBorder(Color.BLACK, 5);
+		inputTextField.setBorder(inputBorder);
+		frmLoopOptimization.getContentPane().add(inputTextField);
 
-		// ====================================================================================================================
 
 		outputTextField = new JTextArea();
-		outputTextField.setBounds(744, 38, 440, 622);
+		outputTextField.setBounds(730, 38, 440, 622);
 		frmLoopOptimization.getContentPane().add(outputTextField);
 		outputTextField.setColumns(10);
+		Border OutputBorder = BorderFactory.createLineBorder(Color.BLACK, 5);
+		outputTextField.setBorder(OutputBorder);
+		frmLoopOptimization.getContentPane().add(outputTextField);
 
 		JLabel inputTitle = new JLabel("INPUT CODE");
 		inputTitle.setForeground(Color.BLACK);
@@ -102,8 +108,11 @@ public class GUI {
 				startTransform(0);
 			}
 		});
-		UnrollBtn.setForeground(Color.BLUE);
+		UnrollBtn.setForeground(Color.BLACK);
 		UnrollBtn.setBounds(492, 54, 125, 43);
+		frmLoopOptimization.getContentPane().add(UnrollBtn);
+		Border UnrollBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
+		UnrollBtn.setBorder(UnrollBorder);
 		frmLoopOptimization.getContentPane().add(UnrollBtn);
 
 		JButton InterchangeBtn = new JButton("Interchange");
@@ -114,9 +123,12 @@ public class GUI {
 		});
 		InterchangeBtn.setMinimumSize(new Dimension(100, 25));
 		InterchangeBtn.setMaximumSize(new Dimension(100, 25));
-		InterchangeBtn.setForeground(Color.BLUE);
+		InterchangeBtn.setForeground(Color.BLACK);
 		InterchangeBtn.setFont(new Font("Arial Black", Font.BOLD, 11));
 		InterchangeBtn.setBounds(492, 142, 125, 43);
+		frmLoopOptimization.getContentPane().add(InterchangeBtn);
+		Border InterchangeBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
+		InterchangeBtn.setBorder(InterchangeBorder);
 		frmLoopOptimization.getContentPane().add(InterchangeBtn);
 
 		JButton Interchange_info = new JButton("?");
@@ -139,6 +151,9 @@ public class GUI {
 		});
 		FissionBtn.setBounds(492, 235, 125, 43);
 		frmLoopOptimization.getContentPane().add(FissionBtn);
+		Border FissionBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
+		FissionBtn.setBorder(FissionBorder);
+		frmLoopOptimization.getContentPane().add(FissionBtn);
 
 		JButton Fission_info = new JButton("?");
 		Fission_info.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -157,8 +172,11 @@ public class GUI {
 				startTransform(3);
 			}
 		});
-		FusionBtn.setForeground(Color.BLUE);
+		FusionBtn.setForeground(Color.BLACK);
 		FusionBtn.setBounds(492, 335, 125, 43);
+		frmLoopOptimization.getContentPane().add(FusionBtn);
+		Border FusionBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
+		FusionBtn.setBorder(FusionBorder);
 		frmLoopOptimization.getContentPane().add(FusionBtn);
 
 		JButton Fusion_info = new JButton("?");
@@ -178,19 +196,22 @@ public class GUI {
 				startTransform(4);
 			}
 		});
-		SkewingBtn.setForeground(Color.BLUE);
+		SkewingBtn.setForeground(Color.BLACK);
 		SkewingBtn.setBounds(492, 431, 125, 43);
 		frmLoopOptimization.getContentPane().add(SkewingBtn);
+		Border SkewingBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
+		SkewingBtn.setBorder(SkewingBorder);
+		frmLoopOptimization.getContentPane().add(SkewingBtn);
 
-		JButton btnNewButton_5 = new JButton("?");
-		btnNewButton_5.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnNewButton_5.setForeground(Color.BLUE);
-		btnNewButton_5.addActionListener(new ActionListener() {
+		JButton Skewing_info = new JButton("?");
+		Skewing_info.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		Skewing_info.setForeground(Color.BLUE);
+		Skewing_info.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_5.setBounds(660, 441, 50, 23);
-		frmLoopOptimization.getContentPane().add(btnNewButton_5);
+		Skewing_info.setBounds(659, 442, 50, 23);
+		frmLoopOptimization.getContentPane().add(Skewing_info);
 
 		JButton InversionBtn = new JButton("Inversion");
 		InversionBtn.setFont(new Font("Arial Black", Font.BOLD, 11));
@@ -202,8 +223,12 @@ public class GUI {
 			}
 		});
 		frmLoopOptimization.getContentPane().add(InversionBtn);
+		Border InversionBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
+		InversionBtn.setBorder(InversionBorder);
+		frmLoopOptimization.getContentPane().add(InversionBtn);
 
 		JButton Inversion_info = new JButton("?");
+		Inversion_info.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		Inversion_info.setForeground(Color.BLUE);
 		Inversion_info.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -214,7 +239,7 @@ public class GUI {
 
 		JButton ReversalBtn = new JButton("Reversal");
 		ReversalBtn.setFont(new Font("Arial Black", Font.BOLD, 11));
-		ReversalBtn.setForeground(Color.BLUE);
+		ReversalBtn.setForeground(Color.BLACK);
 		ReversalBtn.setBounds(492, 612, 125, 43);
 		ReversalBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -231,6 +256,9 @@ public class GUI {
 		});
 		Reversal_info.setBounds(660, 622, 50, 23);
 		frmLoopOptimization.getContentPane().add(Reversal_info);
+		Border ReversalBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
+		ReversalBtn.setBorder(ReversalBorder);
+		frmLoopOptimization.getContentPane().add(ReversalBtn);
 	}
 
 	private void startTransform(int x) {
