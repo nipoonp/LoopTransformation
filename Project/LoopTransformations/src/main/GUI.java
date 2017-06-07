@@ -43,6 +43,7 @@ public class GUI extends JPanel{
 	JFrame InterchangeHelp;
 	private JTextArea inputTextField;
 	private JTextArea outputTextField;
+	private JProgressBar progressBar;
 	private String inputString;
 	boolean ArrayFound = false;
 	private JavaSyntaxChecker checker;
@@ -292,7 +293,7 @@ public class GUI extends JPanel{
 		ReversalBtn.setBorder(ReversalBorder);
 		frmLoopOptimization.getContentPane().add(ReversalBtn);
 		
-		JProgressBar progressBar = new JProgressBar();
+		progressBar = new JProgressBar();
 		progressBar.setBounds(520, 631, 157, 14);
 		frmLoopOptimization.getContentPane().add(progressBar);
 		
@@ -308,6 +309,10 @@ public class GUI extends JPanel{
 			@Override
 			protected String doInBackground() throws Exception {
 				// TODO Auto-generated method stub
+				
+				if(inputTextField.getText().isEmpty()){
+					return "Please type in a input.";
+				}
 				
 				ArrayList<ArrayList<String>> returnStringArrayList = new ArrayList<ArrayList<String>>();
 				String returnString = "";
@@ -399,6 +404,7 @@ public class GUI extends JPanel{
 				try {
 					String status = get();
 					outputTextField.setText(status);
+					progressBar.setValue(100);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
