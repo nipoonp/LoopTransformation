@@ -25,13 +25,15 @@ import javax.script.ScriptException;
 import javax.swing.JOptionPane;
 
 public class Generic {
-	   /**
-	   * This method is used to check if two strings are the same.
-	   * 
-	   * @param input This is the first paramter to checkIfEqual method
-	   * @param input2  This is the second parameter to checkIfEqual method
-	   * @return boolean This returns true if both strings are the same.
-	   */
+	/**
+	 * This method is used to check if two strings are the same.
+	 * 
+	 * @param input
+	 *            This is the first paramter to checkIfEqual method
+	 * @param input2
+	 *            This is the second parameter to checkIfEqual method
+	 * @return boolean This returns true if both strings are the same.
+	 */
 	protected boolean checkIfEqual(String input, String input2) {
 		input = input.substring(input.indexOf("=") + 1);
 		input = input.substring(0, input.indexOf(")"));
@@ -46,13 +48,14 @@ public class Generic {
 		return input.equalsIgnoreCase(input2);
 	}
 
-	
-	   /**
-	   * This method is used to get the iteration variable for a for loop.
-	   * @param word This is the first line of the for loop which is used to find
-	   * out the iteration variable 
-	   * @return char This returns the iteration variable used in this for loop..
-	   */
+	/**
+	 * This method is used to get the iteration variable for a for loop.
+	 * 
+	 * @param word
+	 *            This is the first line of the for loop which is used to find
+	 *            out the iteration variable
+	 * @return char This returns the iteration variable used in this for loop..
+	 */
 	protected char getIterationVariable(String word) {
 		if (word == null || word.isEmpty()) {
 			throw new IllegalArgumentException("input word must have non-empty value.");
@@ -73,6 +76,14 @@ public class Generic {
 		return maxchar;
 	}
 
+	/**
+	 * This method is used to get the max value of the looping variable will reach.
+	 * 
+	 * @param word
+	 *            This is the first line of the for loop which is used to find
+	 *            out the max iteration variable
+	 * @return char This returns the max iteration variable used in this for loop..
+	 */
 	protected String getMaxIterationValue(String input) {
 
 		input = input.substring(input.indexOf(";") + 1);
@@ -94,6 +105,14 @@ public class Generic {
 		return input;
 	}
 
+	/**
+	 * This method is used to get the starting value of the  variable will start at.
+	 * 
+	 * @param word
+	 *            This is the first line of the for loop which is used to find
+	 *            out the first value iteration variable
+	 * @return String This returns the first iteration value used in this for loop..
+	 */
 	protected String getStartingIterationValue(String input) {
 		input = input.substring(input.indexOf("=") + 1);
 		input = input.substring(0, input.indexOf(";"));
@@ -101,6 +120,14 @@ public class Generic {
 		return input;
 	}
 
+	/**
+	 * This method is used to get howmuch each of the i variable is incerasing by each ieration.
+	 * 
+	 * @param input
+	 *            This is the first line of the for loop which is used to find
+	 *            out the iteration increment
+	 * @return String This returns the increment iteration used in this for loop..
+	 */
 	protected String getIterationIncrement(String input) {
 		input = input.substring(input.indexOf(";") + 1);
 		input = input.substring(0, input.indexOf(")"));
@@ -108,11 +135,28 @@ public class Generic {
 		return input;
 	}
 
+	/**
+	 * This method is used to get like the increment part of the for loop only. ie i++ or i--.
+	 * 
+	 * @param input
+	 *            This is the first line of the for loop which is used to find
+	 *            out the iteration increment
+	 * @return String This returns the increment iteration used in this for loop..
+	 */
 	protected String getIterationIncrementOnly(String input) {
 		input = getIterationIncrement(input);
 		return input.substring(input.indexOf(";") + 1);
 	}
 
+	/**
+	 * Check bound uses a brute force method to find all the common dependencies in the two array accesses.
+	 * 
+	 * @param currentTemp1
+	 *            This is the first line of array index you want to compare.
+	 * @param currentTemp2
+	 *            This is the second line of array index you want to compare.         
+	 * @return boolean This returns the increment iteration used in this for loop..
+	 */
 	private boolean checkBounds(String currentTemp1, String currentTemp2, String forLine) {
 
 		currentTemp1 = currentTemp1.substring(currentTemp1.indexOf("[") + 1, currentTemp1.indexOf("]"));
@@ -154,6 +198,7 @@ public class Generic {
 		}
 		return findDupes(a1, a2);
 	}
+	
 
 	private boolean findDupes(int[] a, int[] b) {
 
@@ -400,7 +445,7 @@ public class Generic {
 
 		ArrayList<ArrayList<String>> twoDArrayList = new ArrayList<ArrayList<String>>();
 		boolean returned;
-		
+
 		for (int i = 0; i < testList.size(); i++) {
 			twoDArrayList.add(splitLine(testList.get(i)));
 		}
@@ -444,7 +489,7 @@ public class Generic {
 		for (int i = 0; i < testList.size(); i++) {
 			twoDArrayList.add(splitLine(testList.get(i)));
 		}
-		
+
 		for (int i = 0; i < testList.size(); i++) {
 			String currentTemp1 = twoDArrayList.get(i).get(0);
 
@@ -677,16 +722,19 @@ public class Generic {
 		return gcdparams;
 
 	}
-
+	/**
+	 * GCD test method returns the remainder of the two values passed in.
+	 * 
+	 * @param a
+	 *            Integer value which you want to do GCD on.
+	 * @param b
+	 *            Integer value which you want to do GCD on.    
+	 * @return String This returns the increment iteration used in this for loop..
+	 */
 	private int gcd(int a, int b) {
 		if (a == 0 || b == 0)
 			return a + b; // base case
 		return gcd(b, a % b);
 	}
 
-	
-	
-	
-	
-	
 }
