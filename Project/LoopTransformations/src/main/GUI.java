@@ -73,6 +73,7 @@ public class GUI extends JPanel{
 
 		inputTextField = new JTextArea();
 		inputTextField.setBounds(25, 38, 440, 622);
+		inputTextField.setFont(new Font("Arial", Font.PLAIN, 24));
 		frmLoopOptimization.getContentPane().add(inputTextField);
 		inputTextField.setColumns(10);
 		Border inputBorder = BorderFactory.createLineBorder(Color.BLACK, 5);
@@ -82,6 +83,7 @@ public class GUI extends JPanel{
 
 		outputTextField = new JTextArea();
 		outputTextField.setBounds(730, 38, 440, 622);
+		outputTextField.setFont(new Font("Arial", Font.PLAIN, 24));
 		frmLoopOptimization.getContentPane().add(outputTextField);
 		outputTextField.setColumns(10);
 		Border OutputBorder = BorderFactory.createLineBorder(Color.BLACK, 5);
@@ -109,12 +111,12 @@ public class GUI extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Mew = new JFrame();
+				ImageIcon image = new ImageIcon(this.getClass().getResource("/images/Unrolling.jpg"));
 				Mew.setTitle("Unrolling Image");
 				Mew.setResizable(false);
-				Mew.setBounds(100, 100, 856, 477);
-				Mew.getContentPane().setLayout(null);
+				Mew.setBounds(100, 100, image.getIconHeight(), image.getIconWidth());
 				Mew.setVisible( true ); 
-				Mew.add(new JLabel(new ImageIcon("/LoopTransformations/src/main/Unrolling.jpg")));
+				Mew.add(new JLabel(image));
 			}
 		});
 		Unroll_info.setBounds(660, 221, 50, 23);
@@ -128,7 +130,7 @@ public class GUI extends JPanel{
 		UnrollBtn.setMaximumSize(new Dimension(100, 25));
 		UnrollBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				startTransform(0);
+				startTransform(2);
 			}
 		});
 		UnrollBtn.setForeground(Color.BLACK);
@@ -141,7 +143,7 @@ public class GUI extends JPanel{
 		JButton InterchangeBtn = new JButton("Interchange");
 		InterchangeBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				startTransform(1);
+				startTransform(3);
 			}
 		});
 		InterchangeBtn.setMinimumSize(new Dimension(100, 25));
@@ -169,7 +171,7 @@ public class GUI extends JPanel{
 		FissionBtn.setForeground(Color.BLACK);
 		FissionBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				startTransform(2);
+				startTransform(0);
 			}
 		});
 		FissionBtn.setBounds(492, 43, 125, 43);
@@ -192,7 +194,7 @@ public class GUI extends JPanel{
 		FusionBtn.setFont(new Font("Arial Black", Font.BOLD, 11));
 		FusionBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				startTransform(3);
+				startTransform(1);
 			}
 		});
 		FusionBtn.setForeground(Color.BLACK);
@@ -300,7 +302,7 @@ public class GUI extends JPanel{
 			protected String doInBackground() throws Exception {
 				// TODO Auto-generated method stub
 				
-				String returnString = "";
+				ArrayList<ArrayList<String>> returnString = new ArrayList<ArrayList<String>>();
 				
 				write_to_file();
 				
@@ -309,39 +311,44 @@ public class GUI extends JPanel{
 					 //code to be executed;   
 					Fission fission = new Fission();
 					publish("xoxo");
-					returnString = (fission.compute(stringsArrayList, inputString)).toString();
+					returnString = (fission.compute(stringsArrayList, inputString));
 					
 				break;  //optional  
 				case 1:    
 					 //code to be executed;   
 					Fusion fusion = new Fusion();
-					publish(fusion.compute(stringsArrayList, inputString));
+					publish("xoxo");
+					returnString = (fusion.compute(stringsArrayList, inputString));
 				break;  //optional  
 				case 2:    
 						 //code to be executed;  
 					Unrolling unrolling = new Unrolling();
-					publish(unrolling.compute(stringsArrayList, inputString));
+					publish("xoxo");
+					returnString = (unrolling.compute(stringsArrayList, inputString));
 				break;  //optional  
 				case 3:    
 						 //code to be executed; 
 					Interchange interchange = new Interchange();
-					publish(interchange.compute(stringsArrayList, inputString));
+					publish("xoxo");
+					returnString = (interchange.compute(stringsArrayList, inputString));
 				break;  //optional  
 				case 4:    
 							 //code to be executed;    
 					Skewing skewing = new Skewing();
-					publish(skewing.compute(stringsArrayList, inputString));
+					publish("xoxo");
+					returnString = (skewing.compute(stringsArrayList, inputString));
 				break;  //optional  
 				case 5:    
 							 //code to be executed;    
 					Inversion inversion = new Inversion();
-					publish(inversion.compute(stringsArrayList, inputString));
-					System.out.println("I AM HERE");
+					publish("xoxo");
+					returnString = (inversion.compute(stringsArrayList, inputString));
 				break;  //optional  
 				case 6:    
 								 //code to be executed;  
 					Reversal reversal = new Reversal();
-					publish(reversal.compute(stringsArrayList, inputString));
+					publish("xoxo");
+					returnString = (reversal.compute(stringsArrayList, inputString));
 				break;  //optional  								    
 				default:      
 				}    
@@ -354,7 +361,7 @@ public class GUI extends JPanel{
 //					publish(i);
 //				}
 				
-				return returnString;
+				return returnString.toString();
 			}
 			
 //			@Override
