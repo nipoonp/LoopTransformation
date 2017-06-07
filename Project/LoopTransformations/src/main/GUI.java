@@ -41,7 +41,12 @@ public class GUI extends JPanel{
 
 	JFrame frmLoopOptimization;
 	JFrame unrollHelp;
-	JFrame InterchangeHelp;
+	JFrame interchangeHelp;
+	JFrame fusionHelp;
+	JFrame fissionHelp;
+	JFrame skewingHelp;
+	JFrame inversionHelp;
+	JFrame reversalHelp;
 	private JTextArea inputTextField;
 	private JTextArea outputTextField;
 	private String inputString;
@@ -68,7 +73,7 @@ public class GUI extends JPanel{
 		frmLoopOptimization.setResizable(false);
 		frmLoopOptimization.getContentPane().setFont(new Font("Arial Black", Font.BOLD, 11));
 		frmLoopOptimization.getContentPane().setForeground(new Color(0, 0, 0));
-		frmLoopOptimization.setBounds(100, 100, 856, 477);
+		frmLoopOptimization.setBounds(10, 10, 856, 477);
 		frmLoopOptimization.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmLoopOptimization.getContentPane().setLayout(null);
 
@@ -113,9 +118,9 @@ public class GUI extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 				unrollHelp = new JFrame();
 				ImageIcon image = new ImageIcon(this.getClass().getResource("/images/Unrolling.jpg"));
-				unrollHelp.setTitle("Unrolling Image");
+				unrollHelp.setTitle("Unrolling Help");
 				unrollHelp.setResizable(true);
-				unrollHelp.setBounds(0, 0, 800, 600);
+				unrollHelp.setBounds(0,0, 900, 800);
 				unrollHelp.setVisible( true ); 
 				unrollHelp.add(new JLabel(image));
 			}
@@ -162,13 +167,13 @@ public class GUI extends JPanel{
 		Interchange_info.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		Interchange_info.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				InterchangeHelp = new JFrame();
+				interchangeHelp = new JFrame();
 				ImageIcon InterchangeIcon = new ImageIcon(this.getClass().getResource("/images/Interchange.jpg"));
-				InterchangeHelp.setTitle("Interchage Image");
-				InterchangeHelp.setResizable(true);
-				InterchangeHelp.setBounds(10,10, InterchangeIcon.getIconHeight(), InterchangeIcon.getIconWidth());
-				InterchangeHelp.setVisible( true ); 
-				InterchangeHelp.add(new JLabel(InterchangeIcon));
+				interchangeHelp.setTitle("Interchage Help");
+				interchangeHelp.setResizable(true);
+				interchangeHelp.setBounds(0,0, 900, 800);
+				interchangeHelp.setVisible( true ); 
+				interchangeHelp.add(new JLabel(InterchangeIcon));
 			}
 		});
 		Interchange_info.setBounds(660, 313, 50, 23);
@@ -193,6 +198,13 @@ public class GUI extends JPanel{
 		Fission_info.setForeground(Color.BLUE);
 		Fission_info.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				fissionHelp = new JFrame();
+				ImageIcon fissionIcon = new ImageIcon(this.getClass().getResource("/images/Fission.jpg"));
+				fissionHelp.setTitle("Fission Help");
+				fissionHelp.setResizable(true);
+				fissionHelp.setBounds(0,0, 900, 800);
+				fissionHelp.setVisible( true ); 
+				fissionHelp.add(new JLabel(fissionIcon));
 			}
 		});
 		Fission_info.setBounds(660, 54, 50, 23);
@@ -217,6 +229,13 @@ public class GUI extends JPanel{
 		Fusion_info.setForeground(Color.BLUE);
 		Fusion_info.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				fusionHelp = new JFrame();
+				ImageIcon InterchangeIcon = new ImageIcon(this.getClass().getResource("/images/Fusion.jpg"));
+				fusionHelp.setTitle("Interchage Help");
+				fusionHelp.setResizable(true);
+				fusionHelp.setBounds(0,0, 900, 800);
+				fusionHelp.setVisible( true ); 
+				fusionHelp.add(new JLabel(InterchangeIcon));
 			}
 		});
 		Fusion_info.setBounds(660, 139, 50, 23);
@@ -241,6 +260,13 @@ public class GUI extends JPanel{
 		Skewing_info.setForeground(Color.BLUE);
 		Skewing_info.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				skewingHelp = new JFrame();
+				ImageIcon InterchangeIcon = new ImageIcon(this.getClass().getResource("/images/LoopSkewing.jpg"));
+				skewingHelp.setTitle("Interchage Help");
+				skewingHelp.setResizable(true);
+				skewingHelp.setBounds(0,0, 900, 800);
+				skewingHelp.setVisible( true ); 
+				skewingHelp.add(new JLabel(InterchangeIcon));
 			}
 		});
 		Skewing_info.setBounds(660, 403, 50, 23);
@@ -265,6 +291,13 @@ public class GUI extends JPanel{
 		Inversion_info.setForeground(Color.BLUE);
 		Inversion_info.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				inversionHelp = new JFrame();
+				ImageIcon InterchangeIcon = new ImageIcon(this.getClass().getResource("/images/Inversion.jpg"));
+				inversionHelp.setTitle("Interchage Help");
+				inversionHelp.setResizable(true);
+				inversionHelp.setBounds(0,0, 900, 800);
+				inversionHelp.setVisible( true ); 
+				inversionHelp.add(new JLabel(InterchangeIcon));
 			}
 		});
 		Inversion_info.setBounds(660, 486, 50, 23);
@@ -285,6 +318,13 @@ public class GUI extends JPanel{
 		Reversal_info.setForeground(Color.BLUE);
 		Reversal_info.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				reversalHelp = new JFrame();
+				ImageIcon InterchangeIcon = new ImageIcon(this.getClass().getResource("/images/Reversal.jpg"));
+				reversalHelp.setTitle("Interchage Help");
+				reversalHelp.setResizable(true);
+				reversalHelp.setBounds(0,0, 900, 800);
+				reversalHelp.setVisible( true ); 
+				reversalHelp.add(new JLabel(InterchangeIcon));
 			}
 		});
 		Reversal_info.setBounds(660, 574, 50, 23);
