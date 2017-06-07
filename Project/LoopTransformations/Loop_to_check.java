@@ -15,7 +15,10 @@ int k=0;
 
 
 
-
+int sum = 0;
+for(i=0;i<100;i++){
+	sum += a[i];
+}
 
 
 

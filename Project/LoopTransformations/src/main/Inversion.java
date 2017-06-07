@@ -10,9 +10,10 @@ public class Inversion extends Generic  {
 		System.out.println("New inversion!");
 	}
 	
-	public String compute(ArrayList<ArrayList<String>> stringsArrayList, String inputString){
+	public ArrayList<ArrayList<String>> compute(ArrayList<ArrayList<String>> stringsArrayList, String inputString){
 		
-
+		ArrayList<ArrayList<String>> outputArrayList = new ArrayList<ArrayList<String>>();
+		ArrayList<String> outArrayList = new ArrayList<String>();
 		String whileLoopContents = "";
 		String[] forLoopSplit = new String[3];
 		int for_Found = 0;
@@ -61,14 +62,22 @@ public class Inversion extends Generic  {
 		// then the optimized structure below followed
 		// by the conditions.
 		for (String z : initilizerConditions) {
-			System.out.println(z);
+			outArrayList = new ArrayList<String>();
+			outArrayList.add(z);
+			outputArrayList.add(outArrayList);
 		}
 
-		System.out.println("\n");
+		outArrayList = new ArrayList<String>();
+		outArrayList.add("\n");
+		outputArrayList.add(outArrayList);
 		if (while_Found == 1) {
-			System.out.println("if(" + whileLoopContents + "){");
+			outArrayList = new ArrayList<String>();
+			outArrayList.add("if(" + whileLoopContents + "){");
+			outputArrayList.add(outArrayList);
 		} else if (for_Found == 1) {
-			System.out.println("if(" + forLoopSplit[1] + "){");
+			outArrayList = new ArrayList<String>();
+			outArrayList.add("if(" + forLoopSplit[1] + "){");
+			outputArrayList.add(outArrayList);
 		}
 		System.out.println("do{");
 		for (String z : NormalConditions) {
@@ -77,14 +86,21 @@ public class Inversion extends Generic  {
 
 		if (while_Found == 1) {
 			System.out.println("} while (" + whileLoopContents + ") ;");
+			outArrayList = new ArrayList<String>();
+			outArrayList.add("} while (" + whileLoopContents + ") ;");
+			outputArrayList.add(outArrayList);
 		} else if (for_Found == 1) {
-			System.out.println("} while (" + forLoopSplit[1] + ") ;");
+			outArrayList = new ArrayList<String>();
+			outArrayList.add("} while (" + forLoopSplit[1] + ") ;");
+			outputArrayList.add(outArrayList);
 		}
-		System.out.println("}");
+		outArrayList = new ArrayList<String>();
+		outArrayList.add("}");
+		outputArrayList.add(outArrayList);
 
 	
 		
-		return "inversion";
+		return outputArrayList;
 	}
 	
 }

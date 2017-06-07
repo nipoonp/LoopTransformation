@@ -9,15 +9,18 @@ public class Skewing extends Generic  {
 		System.out.println("New skewing!");
 	}
 	
-	public String compute(ArrayList<ArrayList<String>> stringsArrayList, String inputString){
+	public ArrayList<ArrayList<String>> compute(ArrayList<ArrayList<String>> stringsArrayList, String inputString){
 		
-
+		ArrayList<ArrayList<String>> outputArrayList = new ArrayList<ArrayList<String>>();
 
 		if ((test2DI(stringsArrayList.get(4)) == true) && (test2DJ(stringsArrayList.get(4)) == true)) {
 			System.out.println("skewing...");
 		} else {
 			System.out.println("cannot skew!");
-			return "cannot skew!";
+			ArrayList<String> o = new ArrayList<String>();
+			o.add("Cannot skew!");
+			stringsArrayList.add(o);
+			return stringsArrayList;
 		}
 
 		// first for loop
@@ -46,7 +49,7 @@ public class Skewing extends Generic  {
 
 	
 		
-		return "skewing";
+		return stringsArrayList;
 	}
 
 }

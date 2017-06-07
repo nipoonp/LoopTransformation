@@ -9,9 +9,9 @@ public class Interchange extends Generic  {
 		System.out.println("New interchange!");
 	}
 	
-	public String compute(ArrayList<ArrayList<String>> stringsArrayList, String inputString){
+	public ArrayList<ArrayList<String>> compute(ArrayList<ArrayList<String>> stringsArrayList, String inputString){
 		
-
+		ArrayList<ArrayList<String>> outputArrayList = new ArrayList<ArrayList<String>>();
 
 		if (test2DI(stringsArrayList.get(4)) == false) {
 			ArrayList<String> temp = stringsArrayList.get(1);
@@ -19,7 +19,10 @@ public class Interchange extends Generic  {
 			stringsArrayList.set(3, temp);
 			System.out.println("Interchanging...");
 		} else {
-			System.out.println("Can't Interchange!");
+			ArrayList<String> o = new ArrayList<String>();
+			o.add("Cannot Interchange!");
+			stringsArrayList.add(o);
+			return stringsArrayList;
 		}
 
 		System.out.println(stringsArrayList);
@@ -30,6 +33,6 @@ public class Interchange extends Generic  {
 
 	
 		
-		return "interchange";
+		return stringsArrayList;
 	}
 }

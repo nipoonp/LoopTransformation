@@ -10,16 +10,18 @@ public class Fission extends Generic {
 		System.out.println("New fission!");
 	}
 	
-	public ArrayList<String> compute(ArrayList<ArrayList<String>> stringsArrayList, String inputString){
+	public ArrayList<ArrayList<String>> compute(ArrayList<ArrayList<String>> stringsArrayList, String inputString){
 
 		int for_Found = 0;
 		String tempLine = "";
 		
-		ArrayList<String> outputArrayList = new ArrayList<String>();
+		ArrayList<ArrayList<String>> outputArrayList = new ArrayList<ArrayList<String>>();
+		ArrayList<String> outArrayList = new ArrayList<String>();
 
 		if (test(stringsArrayList.get(2), stringsArrayList.get(1))) {
 			System.out.println("cannot fission!");
-			outputArrayList.add("cannot fission!");
+			outArrayList.add("cannot fission!");
+			outputArrayList.add(outArrayList);
 			return outputArrayList;
 		}
 
@@ -60,25 +62,43 @@ public class Fission extends Generic {
 		// by the conditions.
 
 		for (String z : initilizerConditions) {
-			outputArrayList.add(z);
+			outArrayList = new ArrayList<String>();
+			outArrayList.add(z);
+			outputArrayList.add(outArrayList);
 		}
 		if (mainForLoop.contains("{")) {
-			outputArrayList.add(mainForLoop);
+			outArrayList = new ArrayList<String>();
+			outArrayList.add(mainForLoop);
+			outputArrayList.add(outArrayList);
 		} else {
-			outputArrayList.add(mainForLoop);
-			outputArrayList.add("{");
+			outArrayList = new ArrayList<String>();
+			outArrayList.add(mainForLoop);
+			outputArrayList.add(outArrayList);
+			outArrayList = new ArrayList<String>();
+			outArrayList.add("{");
+			outputArrayList.add(outArrayList);
 		}
 		// for each condition , print it in a seperate for loop.
 		int normalConditions_size = NormalConditions.size();
 		for (int z = 0; z < normalConditions_size; z++) {
-			outputArrayList.add(NormalConditions.get(z));
-			outputArrayList.add("}");
+			outArrayList = new ArrayList<String>();
+			outArrayList.add(NormalConditions.get(z));
+			outputArrayList.add(outArrayList);
+			outArrayList = new ArrayList<String>();
+			outArrayList.add("}");
+			outputArrayList.add(outArrayList);
 			if (z != (normalConditions_size - 1)) {
 				if (mainForLoop.contains("{")) {
-					outputArrayList.add(mainForLoop);
+					outArrayList = new ArrayList<String>();
+					outArrayList.add(mainForLoop);
+					outputArrayList.add(outArrayList);
 				} else {
-					outputArrayList.add(mainForLoop);
-					outputArrayList.add("{");
+					outArrayList = new ArrayList<String>();
+					outArrayList.add(mainForLoop);
+					outputArrayList.add(outArrayList);
+					outArrayList = new ArrayList<String>();
+					outArrayList.add("{");
+					outputArrayList.add(outArrayList);
 				}
 			}
 		}

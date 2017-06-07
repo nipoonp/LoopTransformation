@@ -9,9 +9,9 @@ public class Fusion extends Generic {
 		System.out.println("New fusion!");
 	}
 	
-	public String compute(ArrayList<ArrayList<String>> stringsArrayList, String inputString){
+	public ArrayList<ArrayList<String>> compute(ArrayList<ArrayList<String>> stringsArrayList, String inputString){
 		
-
+		ArrayList<ArrayList<String>> outputArrayList = new ArrayList<ArrayList<String>>();
 		// String I =
 		// Character.toString(getIterationVariable(stringsArrayList.get(1).get(0)));
 		// String J =
@@ -66,6 +66,6 @@ public class Fusion extends Generic {
 
 	
 		
-		return "fusion";
+		return stringsArrayList;
 	}
 }

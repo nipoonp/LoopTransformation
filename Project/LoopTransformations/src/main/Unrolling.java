@@ -10,9 +10,10 @@ public class Unrolling extends Generic {
 		System.out.println("New unroll!");
 	}
 	
-	public String compute(ArrayList<ArrayList<String>> stringsArrayList, String inputString){
+	public ArrayList<ArrayList<String>> compute(ArrayList<ArrayList<String>> stringsArrayList, String inputString){
 		
-
+		ArrayList<ArrayList<String>> outputArrayList = new ArrayList<ArrayList<String>>();
+		ArrayList<String> outArrayList = new ArrayList<String>();
 		int forFound = 0;
 		int increment_var = 4;
 		int N_value_int = 0;
@@ -54,7 +55,9 @@ public class Unrolling extends Generic {
 				} else if (ForLoopSplit[1].contains("=")) {
 					N_value = ForLoopSplit[1].substring(ForLoopSplit[1].indexOf("=") + 1);
 				} else {
-					System.out.println("Check your For loop's syntax. Increment to N value must either be < , <= , = ");
+					outArrayList = new ArrayList<String>();
+					outArrayList.add("Check your For loop's syntax. Increment to N value must either be < , <= , = ");
+					outputArrayList.add(outArrayList);
 				}
 				N_value_int = Integer.parseInt(N_value);
 				ForLoopSegments = (lines[i].substring(0, lines[i].indexOf("++")) + "+=" + increment_var + ") {");
@@ -106,22 +109,34 @@ public class Unrolling extends Generic {
 		// after the loop.
 
 		for (String z : initilizerConditions) {
-			System.out.println(z);
+			outArrayList = new ArrayList<String>();
+			outArrayList.add(z);
+			outputArrayList.add(outArrayList);
 		}
 
-		System.out.println(ForLoopSegments);
-		System.out.println("{");
+		outArrayList = new ArrayList<String>();
+		outArrayList.add(ForLoopSegments);
+		outputArrayList.add(outArrayList);
+		outArrayList = new ArrayList<String>();
+		outArrayList.add("{");
+		outputArrayList.add(outArrayList);
 		for (String z : normalConditions) {
-			System.out.println(z);
+			outArrayList = new ArrayList<String>();
+			outArrayList.add(z);
+			outputArrayList.add(outArrayList);
 		}
-		System.out.println("}");
+		outArrayList = new ArrayList<String>();
+		outArrayList.add("}");
+		outputArrayList.add(outArrayList);
 		for (String z : remainderConditions) {
-			System.out.println(z);
+			outArrayList = new ArrayList<String>();
+			outArrayList.add(z);
+			outputArrayList.add(outArrayList);
 		}
 
 	
 		
-		return "unrolling";
+		return outputArrayList;
 	}
 
 }

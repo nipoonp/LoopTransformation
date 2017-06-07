@@ -10,9 +10,10 @@ public class Reversal  extends Generic {
 		System.out.println("New reversal!");
 	}
 	
-	public String compute(ArrayList<ArrayList<String>> stringsArrayList, String inputString){
+	public ArrayList<ArrayList<String>> compute(ArrayList<ArrayList<String>> stringsArrayList, String inputString){
 		
-
+		ArrayList<ArrayList<String>> outputArrayList = new ArrayList<ArrayList<String>>();
+		ArrayList<String> outArrayList = new ArrayList<String>();
 		int for_Found = 0;
 		String tempLine = "";
 		String[] forLoopSplit = new String[3];
@@ -54,7 +55,9 @@ public class Reversal  extends Generic {
 				} else if (forLoopSplit[1].contains("=")) {
 					N_value = forLoopSplit[1].substring(forLoopSplit[1].indexOf("=") + 1);
 				} else {
-					System.out.println("Check your For loop's syntax. Increment to N value must either be < , <= , = ");
+					outArrayList = new ArrayList<String>();
+					outArrayList.add("Check your For loop's syntax. Increment to N value must either be < , <= , = ");
+					outputArrayList.add(outArrayList);
 				}
 
 				// finding initial value
@@ -66,7 +69,9 @@ public class Reversal  extends Generic {
 				} else if (forLoopSplit[2].contains("--")) {
 					incrementing = false;
 				} else {
-					System.out.println("Check your For loop's syntax. Increment to N value must either be < , <= , = ");
+					outArrayList = new ArrayList<String>();
+					outArrayList.add("Check your For loop's syntax. Increment to N value must either be < , <= , = ");
+					outputArrayList.add(outArrayList);
 				}
 
 				for_Found = 1;
@@ -87,26 +92,36 @@ public class Reversal  extends Generic {
 		// by the conditions.
 
 		for (String z : initilizerConditions) {
-			System.out.println(z);
+			outArrayList = new ArrayList<String>();
+			outArrayList.add(z);
+			outputArrayList.add(outArrayList);
 		}
 
 		// if print the reversed for loop depending on if the original for loop
 		// was incrementing or decrementing.
 		if (incrementing == true) {
-			System.out.println("for (" + i_value + "=" + N_value + "-1; " + i_value + "<=" + initialValue + "; "
+			outArrayList = new ArrayList<String>();
+			outArrayList.add("for (" + i_value + "=" + N_value + "-1; " + i_value + "<=" + initialValue + "; "
 					+ i_value + "--) {");
+			outputArrayList.add(outArrayList);
 		} else if (incrementing == false) {
-			System.out.println("for (" + i_value + "=" + N_value + "-1; " + i_value + "<=" + initialValue + "; "
+			outArrayList = new ArrayList<String>();
+			outArrayList.add("for (" + i_value + "=" + N_value + "-1; " + i_value + "<=" + initialValue + "; "
 					+ i_value + "++) {");
+			outputArrayList.add(outArrayList);
 		}
 
 		for (String z : NormalConditions) {
-			System.out.println(z);
+			outArrayList = new ArrayList<String>();
+			outArrayList.add(z);
+			outputArrayList.add(outArrayList);
 		}
-		System.out.println("}");
+		outArrayList = new ArrayList<String>();
+		outArrayList.add("}");
+		outputArrayList.add(outArrayList);
 	
 		
-		return "reversal";
+		return outputArrayList;
 	}
 
 }
