@@ -453,14 +453,12 @@ public class Generic {
 			String currentTemp1 = twoDArrayList.get(i).get(0);
 
 			for (int j = 0; j < twoDArrayList.size(); j++) {
-				// if (j == i){
-				// continue;
-				// }
+
 
 				ArrayList<String> subRow = twoDArrayList.get(j);
 
 				for (int k = 1; k < subRow.size(); k++) {
-					// gcd test
+
 					String currentTemp2 = twoDArrayList.get(j).get(k);
 
 					if (currentTemp1.charAt(0) != currentTemp2.charAt(0)) {
@@ -498,7 +496,7 @@ public class Generic {
 				ArrayList<String> subRow = twoDArrayList.get(j);
 
 				for (int k = 1; k < subRow.size(); k++) {
-					// gcd test
+					
 					String currentTemp2 = twoDArrayList.get(j).get(k);
 					if (currentTemp1.charAt(0) != currentTemp2.charAt(0)) {
 						continue;
@@ -532,7 +530,7 @@ public class Generic {
 				ArrayList<String> subRow = twoDArrayList.get(j);
 
 				for (int k = 1; k < subRow.size(); k++) {
-					// gcd test
+					
 					String currentTemp2 = twoDArrayList.get(j).get(k);
 
 					if (currentTemp1.charAt(0) != currentTemp2.charAt(0)) {

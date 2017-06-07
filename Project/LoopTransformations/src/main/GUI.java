@@ -462,7 +462,6 @@ public class GUI extends JPanel{
 			protected void process(List<String> chunks){
 				String value = chunks.get(chunks.size() -1);
 				
-//				outputTextField.setText(value);
 			}			
 			
 			@Override
@@ -520,13 +519,7 @@ public class GUI extends JPanel{
 
 		System.out.println(stringsArrayList);
 
-		// fission();
-		// fusion();
-		// interchange();
-		// inversion();
-		// unrolling();
-		// skewing();
-//		reversal();
+
 	}
 
 	private void write_to_file() {
@@ -536,7 +529,6 @@ public class GUI extends JPanel{
 		System.out.println(inputString);
 		System.out.println("=================");
 		processString(inputString);
-		//outputTextField.setText(inputString);
 
 		try (FileWriter fw = new FileWriter("Loop_to_check.java", false);
 				BufferedWriter bw = new BufferedWriter(fw);
