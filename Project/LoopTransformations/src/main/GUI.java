@@ -40,7 +40,8 @@ import javax.swing.JProgressBar;
 public class GUI extends JPanel{
 
 	JFrame frmLoopOptimization;
-	JFrame Mew;
+	JFrame unrollHelp;
+	JFrame InterchangeHelp;
 	private JTextArea inputTextField;
 	private JTextArea outputTextField;
 	private String inputString;
@@ -110,13 +111,13 @@ public class GUI extends JPanel{
 		Unroll_info.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Mew = new JFrame();
+				unrollHelp = new JFrame();
 				ImageIcon image = new ImageIcon(this.getClass().getResource("/images/Unrolling.jpg"));
-				Mew.setTitle("Unrolling Image");
-				Mew.setResizable(false);
-				Mew.setBounds(100, 100, image.getIconHeight(), image.getIconWidth());
-				Mew.setVisible( true ); 
-				Mew.add(new JLabel(image));
+				unrollHelp.setTitle("Unrolling Image");
+				unrollHelp.setResizable(true);
+				unrollHelp.setBounds(0, 0, 800, 600);
+				unrollHelp.setVisible( true ); 
+				unrollHelp.add(new JLabel(image));
 			}
 		});
 		Unroll_info.setBounds(660, 221, 50, 23);
@@ -161,6 +162,13 @@ public class GUI extends JPanel{
 		Interchange_info.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		Interchange_info.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				InterchangeHelp = new JFrame();
+				ImageIcon InterchangeIcon = new ImageIcon(this.getClass().getResource("/images/Interchange.jpg"));
+				InterchangeHelp.setTitle("Interchage Image");
+				InterchangeHelp.setResizable(false);
+				InterchangeHelp.setBounds(10,10, InterchangeIcon.getIconHeight(), InterchangeIcon.getIconWidth());
+				InterchangeHelp.setVisible( true ); 
+				InterchangeHelp.add(new JLabel(InterchangeIcon));
 			}
 		});
 		Interchange_info.setBounds(660, 313, 50, 23);
