@@ -199,7 +199,16 @@ public class Generic {
 		return findDupes(a1, a2);
 	}
 	
-
+	/**
+	 * This method finds the duplicates bettween two arrays if there are any common elements that means we 
+	 * have depdencies so we return true..
+	 * 
+	 * @param a
+	 *            Array1 which is used to find duplicates
+	 * @param b
+	 *            Array2 which is used to find duplicates
+	 * @return String This will return true if there are duplicates otherwisde false.
+	 */
 	private boolean findDupes(int[] a, int[] b) {
 
 		int temp1 = 0;
@@ -226,6 +235,13 @@ public class Generic {
 		return false;
 	}
 
+	/**
+	 * Split line will spit the input line and take the array access and outputs them as an arraylist.
+	 * 
+	 * @param string
+	 *            input string which we want to run split line on
+	 * @return String This will return true if there are duplicates otherwise false.
+	 */
 	private ArrayList<String> splitLine(String string) {
 
 		ArrayList<String> temp = new ArrayList<String>();
@@ -287,7 +303,13 @@ public class Generic {
 		return temp;
 
 	}
-
+	/**
+	 * This method gets the gcd paramers if the format is j*a +b
+	 * 
+	 * @param s
+	 *            The string which you want to get the gcd parameters for
+	 * @return ArrayList<String> This will return a arraylist of all the gcd paramers in that format..
+	 */
 	private ArrayList<String> getGCDParams_ifNumberOnRightofj(String s) {
 
 		String temp1_leftofi = "";
@@ -364,7 +386,13 @@ public class Generic {
 		return gcdparams;
 
 	}
-
+	/**
+	 * This method gets the gcd paramers if the format is a*j +b
+	 * 
+	 * @param s
+	 *            The string which you want to get the gcd parameters for
+	 * @return ArrayList<String> This will return a arraylist of all the gcd paramers in that format..
+	 */
 	private ArrayList<String> getGCDParams_ifNumberOnLeftofj(String s) {
 		String temp1_leftofi = "";
 		String temp2_rightofi = "";
@@ -425,7 +453,13 @@ public class Generic {
 
 		return gcdparams;
 	}
-
+	/**
+	 * This method gets the gcd paramers
+	 * 
+	 * @param s
+	 *            The string which you want to get the gcd parameters for
+	 * @return ArrayList<String> This will return a arraylist of all the gcd paramers in that format..
+	 */
 	private ArrayList<String> getGCDParams_forJ(String s) {
 
 		if (s.contains("[j")) {
@@ -441,6 +475,15 @@ public class Generic {
 
 	}
 
+	/**
+	 * This method returns if there is a dependency in the for 1D array loop.
+	 * 
+	 * @param testList
+	 *            The lines which we want to do GCD test on
+	 * @param forLine
+	 *           This is the for loop line      
+	 * @return boolean reutrns ture if there is a dependency.
+	 */
 	protected boolean test(ArrayList<String> testList, ArrayList<String> forLine) {
 
 		ArrayList<ArrayList<String>> twoDArrayList = new ArrayList<ArrayList<String>>();
@@ -477,7 +520,15 @@ public class Generic {
 
 		return false;
 	}
-
+	/**
+	 * This method returns if there is a dependency in the for 2D array loop.
+	 * 
+	 * @param testList
+	 *            The lines which we want to do GCD test on
+	 * @param forLine
+	 *           This is the for loop line      
+	 * @return boolean reutrns ture if there is a dependency.
+	 */
 	protected boolean test2DI(ArrayList<String> testList, ArrayList<String> forLine) {
 
 		ArrayList<ArrayList<String>> twoDArrayList = new ArrayList<ArrayList<String>>();
@@ -513,7 +564,15 @@ public class Generic {
 		}
 		return false;
 	}
-
+	/**
+	 * This method returns if there is a dependency in the for 2D array loop.
+	 * 
+	 * @param testList
+	 *            The lines which we want to do GCD test on
+	 * @param forLine
+	 *           This is the for loop line      
+	 * @return boolean reutrns ture if there is a dependency.
+	 */
 	protected boolean test2DJ(ArrayList<String> testList, ArrayList<String> forLine) {
 
 		ArrayList<ArrayList<String>> twoDArrayList = new ArrayList<ArrayList<String>>();
@@ -548,7 +607,15 @@ public class Generic {
 		}
 		return false;
 	}
-
+	/**
+	 * This method returns if there is a dependency in the for 2D array loop.
+	 * 
+	 * @param testList
+	 *            The lines which we want to do GCD test on
+	 * @param forLine
+	 *           This is the for loop line      
+	 * @return boolean reutrns ture if there is a dependency.
+	 */
 	private boolean calculate_gcd_dependence(ArrayList<String> s1, ArrayList<String> s2) {
 
 		int a = Integer.parseInt(s1.get(0));
@@ -570,7 +637,13 @@ public class Generic {
 		}
 
 	}
-
+	/**
+	 * TGet the gcd param deping if i is on the left or right.
+	 * 
+	 * @param s
+	 *            the line which you want to do it on
+	 * @return ArrayList<String> reutrns gcd param as array list.
+	 */
 	private ArrayList<String> getGCDParams_forI(String s) {
 		// returns the gcd parameters for i based on where i is located in the string
 
@@ -581,7 +654,13 @@ public class Generic {
 		}
 
 	}
-
+	/**
+	 * This method gets the gcd paramers if the format is i*a +b
+	 * 
+	 * @param s
+	 *            The string which you want to get the gcd parameters for
+	 * @return ArrayList<String> This will return a arraylist of all the gcd paramers in that format..
+	 */
 	private ArrayList<String> getGCDParams_ifNumberOnRightofi(String s) {
 		//this function allows us to acquire the GCD parameters if the user inputs a format
 		// like i*a + c.
@@ -660,7 +739,13 @@ public class Generic {
 		return gcdparams;
 
 	}
-
+	/**
+	 * This method gets the gcd paramers if the format is a*i +b
+	 * 
+	 * @param s
+	 *            The string which you want to get the gcd parameters for
+	 * @return ArrayList<String> This will return a arraylist of all the gcd paramers in that format..
+	 */
 	private ArrayList<String> getGCDParams_ifNumberOnLeftofi(String s) {
 		//this function allows us to acquire the GCD parameters if the user inputs a format
 		// like a*i + c.

@@ -19,7 +19,15 @@ public class Interchange extends Generic  {
 		// TODO Auto-generated constructor stub
 		System.out.println("New interchange!");
 	}
-	
+	/**
+	 * This method computs the interchsnge on the set of inputs.
+	 * 
+	 * @param stringsArrayList
+	 *            The arraylist containing the input code which was typed and we want to do the transformation on
+	 * @param inputString
+	 *            The string containing the input code which was typed and we want to do the transformation on
+	 * @return ArrayList<ArrayList<String>> This returns the first iteration value used in this for loop..
+	 */
 	public ArrayList<ArrayList<String>> compute(ArrayList<ArrayList<String>> stringsArrayList, String inputString){
 		
 		ArrayList<ArrayList<String>> outputArrayList = new ArrayList<ArrayList<String>>();
